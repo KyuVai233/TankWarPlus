@@ -1,0 +1,32 @@
+# User-specific files
+.vs/
+.idea/
+*.user
+*.suo
+*.db
+
+# Build results
+bin/
+obj/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+
+# Windows Installer logs
+*.log
+
+# JetBrains Rider config folder
+.idea/
+
+# VS Code settings
+.vscode/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+
+# Windows Installer logs
+*.log
