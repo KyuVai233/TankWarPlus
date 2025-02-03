@@ -25,6 +25,18 @@
     <Filter Include="头文件\screen">
       <UniqueIdentifier>{d6519fef-1634-45da-a07c-e861cc069e86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\tank">
+      <UniqueIdentifier>{3fe06d19-fe91-4eb7-ac96-313fbfd9408d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\status_machine">
+      <UniqueIdentifier>{c951f997-dcc4-492e-9b21-f30742b00a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\status_machine\status_node">
+      <UniqueIdentifier>{60f2878a-29c5-498d-9375-a0e7897a5c4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\player">
+      <UniqueIdentifier>{66fb7ac0-761e-461f-9d34-d769e4820646}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vector2.h">
@@ -69,6 +81,24 @@
     <ClInclude Include="util.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="tank.h">
+      <Filter>头文件\tank</Filter>
+    </ClInclude>
+    <ClInclude Include="config_manager.h">
+      <Filter>头文件\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="status_node.h">
+      <Filter>头文件\status_machine\status_node</Filter>
+    </ClInclude>
+    <ClInclude Include="tank_status_node.h">
+      <Filter>头文件\status_machine\status_node</Filter>
+    </ClInclude>
+    <ClInclude Include="status_machine.h">
+      <Filter>头文件\status_machine</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>头文件\player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\thirdparty\cJSON\cJSON.c">
@@ -94,6 +124,12 @@
     </ClCompile>
     <ClCompile Include="button.cpp">
       <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tank.cpp">
+      <Filter>头文件\tank</Filter>
+    </ClCompile>
+    <ClCompile Include="status_machine.cpp">
+      <Filter>头文件\status_machine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

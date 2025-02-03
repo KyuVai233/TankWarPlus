@@ -31,6 +31,11 @@ public:
 		is_usable = flag;
 	}
 
+	void set_on_left_clicked(std::function<void()> on_left_clicked)
+	{
+		this->on_left_clicked = on_left_clicked;
+	}
+
 	void take_on_left_clicked()	const
 	{
 		if (on_left_clicked)	on_left_clicked();
@@ -41,6 +46,11 @@ public:
 		this->on_right_clicked = on_right_clicked;
 	}
 
+	void take_on_right_clicked()	const
+	{
+		if (on_right_clicked)	on_right_clicked();
+	}
+
 	//检测位置是否在按钮内
 	bool check_in_button(float x, float y) const
 	{
@@ -48,7 +58,6 @@ public:
 			(y >= position.y && y <= position.y + size.y);
 	}
 
-	void on_input(const SDL_Event& event);
 	void on_render(SDL_Renderer* renderer);
 
 private:

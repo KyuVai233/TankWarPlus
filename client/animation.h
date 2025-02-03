@@ -28,7 +28,7 @@ public:
 
 	~Animation() = default;
 
-	void restart()
+	void reset()
 	{
 		timer.restart();
 		idx_frame = 0;
@@ -103,8 +103,8 @@ private:
 		SDL_Texture* texture = nullptr;
 
 		Frame() = default;
-		Frame(SDL_Rect rect_src, SDL_Texture* texture)
-			:rect_src(rect_src), texture(texture){ }
+		Frame(SDL_Texture* texture, SDL_Rect rect_src)
+			:texture(texture), rect_src(rect_src) { }
 
 		~Frame() = default;
 	};

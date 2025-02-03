@@ -31,9 +31,9 @@ obj/
 # Windows Installer logs
 *.log
 
-/x64/
+x64/
 
-/bin/
-/obj/
-/Debug/
-/Release/
+bin/
+obj/
+Debug/
+Release/

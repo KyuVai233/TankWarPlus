@@ -48,7 +48,7 @@ void GameManager::on_update(float delta)
 
 void GameManager::on_render(SDL_Renderer* renderer)
 {
-	SDL_Texture* tex = ResourcesManager::instance()->find_texture("me");
+	SDL_Texture* tex = ResourcesManager::instance()->find_texture("background");
 	int width, height;
 	SDL_QueryTexture(tex, nullptr, nullptr, &width, &height);
 	SDL_Rect rect =

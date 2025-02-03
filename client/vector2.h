@@ -35,17 +35,17 @@ public:
 		x -= vec.x, y -= vec.y;
 	}
 
-	double operator*(const Vector2& vec) const
+	float operator*(const Vector2& vec) const
 	{
 		return x * vec.x + y * vec.y;
 	}
 
-	Vector2 operator*(double val) const
+	Vector2 operator*(float val) const
 	{
 		return Vector2(x * val, y * val);
 	}
 
-	void operator*=(double val)
+	void operator*=(float val)
 	{
 		x *= val, y *= val;
 	}
@@ -66,7 +66,7 @@ public:
 	}
 
 	//ÇóÄ£³¤
-	double length() const
+	float length() const
 	{
 		return sqrt(x * x + y * y);
 	}

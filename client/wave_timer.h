@@ -41,6 +41,11 @@ public:
 		paused = true;
 	}
 
+	int get_remaining_wave() const
+	{
+		return final_wave - WaveManager::instance()->get_current_wave();
+	}
+
 	void on_update()
 	{
 		if (paused)	return;

@@ -142,12 +142,18 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="config_manager.h" />
     <ClInclude Include="game_manager.h" />
     <ClInclude Include="manager.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="resources_manager.h" />
     <ClInclude Include="screen.h" />
     <ClInclude Include="screen_manager.h" />
     <ClInclude Include="screen_type.h" />
+    <ClInclude Include="status_machine.h" />
+    <ClInclude Include="tank.h" />
+    <ClInclude Include="status_node.h" />
+    <ClInclude Include="tank_status_node.h" />
     <ClInclude Include="time_timer.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="vector2.h" />
@@ -163,6 +169,8 @@
     <ClCompile Include="resources_manager.cpp" />
     <ClCompile Include="screen.cpp" />
     <ClCompile Include="screen_manager.cpp" />
+    <ClCompile Include="status_machine.cpp" />
+    <ClCompile Include="tank.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

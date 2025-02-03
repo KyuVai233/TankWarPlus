@@ -17,6 +17,11 @@ public:
 		current_wave++;
 	}
 
+	void restart()
+	{
+		current_wave = 0;
+	}
+
 	void on_update()
 	{
 

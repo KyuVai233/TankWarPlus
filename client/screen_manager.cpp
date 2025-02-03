@@ -1,18 +1,21 @@
 #include "screen_manager.h"
 
-void ScreenManager::add_screen(Screen* screen)
+void ScreenManager::add_screen(const std::string& screen_id, Screen* screen)
 {
-	screen_list.emplace_back(screen);
+	screen_pool[screen_id] = screen;
 }
 
-void ScreenManager::switch_screen(const ScreenType& screen_type)
+void ScreenManager::switch_screen(const std::string& screen_id)
 {
-	for (Screen* screen : screen_list)
-	{
-		if (screen->get_screen_type() == screen_type)
-		{
-			currnet_screen = screen;
-			return;
-		}
-	}
+	currnet_screen = screen_pool[screen_id];
+}
+
+void ScreenManager::on_input(const SDL_Event& event)
+{
+	currnet_screen->on_input(event);
+}
+
+void ScreenManager::on_render(SDL_Renderer* renderer)
+{
+	currnet_screen->on_render(renderer);
 }
