@@ -1,8 +1,4 @@
 #include "game_manager.h"
-#include "resources_manager.h"
-#include "util.h"
-
-#include <iostream>
 
 int GameManager::run(int argc, char** argv)
 {
@@ -26,7 +22,6 @@ int GameManager::run(int argc, char** argv)
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 		SDL_RenderClear(renderer);
-		ResourcesManager::instance()->load(renderer);
 
 		on_render(renderer);
 
@@ -48,15 +43,7 @@ void GameManager::on_update(float delta)
 
 void GameManager::on_render(SDL_Renderer* renderer)
 {
-	SDL_Texture* tex = ResourcesManager::instance()->find_texture("background");
-	int width, height;
-	SDL_QueryTexture(tex, nullptr, nullptr, &width, &height);
-	SDL_Rect rect =
-	{
-		0, 0,
-		width, height
-	};
-	draw(renderer, tex, &rect, &rect);
+	ScreenManager::instance()->on_render(renderer);
 }
 
 
@@ -76,6 +63,11 @@ GameManager::GameManager()
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
 	init_assert(renderer, u8"renderer ³õÊ¼»¯Ê§°Ü");
+
+	ResourcesManager::instance()->load(renderer);
+
+	ScreenManager::instance()->add_screen("main_screen", new MainScreen(ResourcesManager::instance()->find_texture("main_background"), "main_screen"));
+	ScreenManager::instance()->on_entry("main_screen");
 }
 
 GameManager::~GameManager()

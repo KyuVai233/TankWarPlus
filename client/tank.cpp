@@ -22,7 +22,7 @@ void Tank::decrease_hp(int val)
 void Tank::set_speed(int val)
 {
 	current_speed = val;
-	ConfigManager* instance = ConfigManager::instance();
+	ConfigHomeManager* instance = ConfigHomeManager::instance();
 	if (current_speed < 0)
 		current_speed = 0;
 	else if (current_hp > instance->get_MAX_TANK_SPEED())

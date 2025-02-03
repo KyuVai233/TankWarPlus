@@ -24,6 +24,7 @@ void Screen::on_input(const SDL_Event& event)
 
 void Screen::on_render(SDL_Renderer* renderer)
 {
+	if (!tex_background)	return;
 	int width, height;
 	SDL_QueryTexture(tex_background, nullptr, nullptr, &width, &height);
 	SDL_Rect rect =

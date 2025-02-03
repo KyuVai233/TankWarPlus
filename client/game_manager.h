@@ -1,6 +1,9 @@
 #pragma once
 
 #include "manager.h"
+#include "resources_manager.h"
+#include "screen_manager.h"
+#include "util.h"
 
 #include <SDL.h>
 #include <SDL_image.h>

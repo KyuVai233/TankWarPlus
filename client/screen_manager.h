@@ -1,7 +1,7 @@
 #pragma once
 
 #include "manager.h"
-#include "screen.h"
+#include "main_screen.h"
 
 #include <string>
 #include <unordered_map>
@@ -11,6 +11,12 @@ class ScreenManager : public Manager<ScreenManager>
 	friend class Manager<ScreenManager>;
 
 public:
+	//设置开始界面
+	void on_entry(const std::string& screen_id)
+	{
+		current_screen = screen_pool[screen_id];
+	}
+
 	//添加界面
 	void add_screen(const std::string& screen_id, Screen* screen);
 
@@ -22,9 +28,10 @@ public:
 
 protected:
 	ScreenManager() = default;
+
 	~ScreenManager() = default;
 
 private:
-	Screen* currnet_screen = nullptr;
+	Screen* current_screen = nullptr;
 	std::unordered_map<std::string, Screen*> screen_pool;
 };

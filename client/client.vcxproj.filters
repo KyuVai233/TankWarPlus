@@ -37,6 +37,9 @@
     <Filter Include="头文件\player">
       <UniqueIdentifier>{66fb7ac0-761e-461f-9d34-d769e4820646}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\game_mode">
+      <UniqueIdentifier>{87dc4a22-c248-44fa-9bfd-c93647ad9b9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vector2.h">
@@ -69,9 +72,6 @@
     <ClInclude Include="screen.h">
       <Filter>头文件\screen</Filter>
     </ClInclude>
-    <ClInclude Include="screen_type.h">
-      <Filter>头文件\screen</Filter>
-    </ClInclude>
     <ClInclude Include="button.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -84,7 +84,7 @@
     <ClInclude Include="tank.h">
       <Filter>头文件\tank</Filter>
     </ClInclude>
-    <ClInclude Include="config_manager.h">
+    <ClInclude Include="config_home_manager.h">
       <Filter>头文件\manager</Filter>
     </ClInclude>
     <ClInclude Include="status_node.h">
@@ -98,6 +98,15 @@
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>头文件\player</Filter>
+    </ClInclude>
+    <ClInclude Include="main_screen.h">
+      <Filter>头文件\screen</Filter>
+    </ClInclude>
+    <ClInclude Include="game_mode.h">
+      <Filter>头文件\game_mode</Filter>
+    </ClInclude>
+    <ClInclude Include="config_game_manager.h">
+      <Filter>头文件\manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="status_machine.cpp">
       <Filter>头文件\status_machine</Filter>
+    </ClCompile>
+    <ClCompile Include="main_screen.cpp">
+      <Filter>头文件\screen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

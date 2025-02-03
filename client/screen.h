@@ -1,39 +1,30 @@
 #pragma once
 
 #include "button.h"
-#include "screen_type.h"
 
 #include <vector>
+#include <string>
 
 class Screen
 {
 public:
 	Screen() = delete;
-	Screen(ScreenType screen_type)
-		:screen_type(screen_type) { }
+	Screen(SDL_Texture* tex_background, const std::string& screen_type)
+		:tex_background(tex_background), screen_type(screen_type), next_screen("none") { };
 	~Screen() = default;
 
-	const ScreenType& get_screen_type() const
+	void set_next_screen(const std::string& next_screen)
 	{
-		return screen_type;
+		this->next_screen = next_screen;
 	}
 
-	//放置按钮
-	void put_button(Button* button)
-	{
-		button_list.emplace_back(button);
-	}
+	virtual void on_input(const SDL_Event& event);
+	virtual void on_render(SDL_Renderer* renderer);
 
-	void set_tex_backfround(SDL_Texture* tex_background)
-	{
-		this->tex_background = tex_background;
-	}
+protected:
+	std::string screen_type;
+	std::string next_screen;
 
-	void on_input(const SDL_Event& event);
-	void on_render(SDL_Renderer* renderer);
-
-private:
-	ScreenType screen_type = ScreenType::None;		//场景类型
 	std::vector<Button*> button_list;				//按钮列表
 	SDL_Texture* tex_background = nullptr;			//背景图
 };
