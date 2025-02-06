@@ -8,4 +8,6 @@ void MainScreen::on_input(const SDL_Event& event)
 void MainScreen::on_render(SDL_Renderer* renderer)
 {
 	Screen::on_render(renderer);
+
+	logo->draw_image(renderer);
 }

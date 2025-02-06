@@ -8,7 +8,9 @@
 class Button
 {
 public:
-	Button() = default;
+	Button(SDL_Texture* texture_idle, SDL_Texture* texture_covered, SDL_Texture* texture_clicked)
+		:texture_idle(texture_idle), texture_covered(texture_covered), texture_clicked(texture_clicked)
+	{ }
 	~Button() = default;
 
 	void set_position(const Vector2& position)
@@ -65,7 +67,10 @@ private:
 	Vector2 size;								//大小
 	bool is_visible = true;						//是否可见
 	bool is_usable = true;						//是否可用
-	SDL_Texture* texture = nullptr;				//按钮图片纹理
+	SDL_Texture* texture_idle = nullptr;		//按钮闲置纹理
+	SDL_Texture* texture_covered = nullptr;		//按钮被覆盖纹理
+	SDL_Texture* texture_clicked = nullptr;		//按钮被点击纹理
+	SDL_Texture* current_texture = texture_idle;//按钮当前纹理
 
 	std::function<void()> on_left_clicked;		//按左键抬起后执行回调
 	std::function<void()> on_right_clicked;		//按右键抬起后执行回调

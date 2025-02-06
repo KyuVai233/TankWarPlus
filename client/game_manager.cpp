@@ -2,6 +2,12 @@
 
 int GameManager::run(int argc, char** argv)
 {
+	if (ConfigGameManager::instance()->get_player()->get_identity() 
+		== Player::Identity::Owner)
+	{
+		std::thread thread_on_server(on_server);
+	}
+
 	Uint64 last_counter = SDL_GetPerformanceCounter();
 	const Uint64 counter_freq = SDL_GetPerformanceFrequency();
 
@@ -29,6 +35,16 @@ int GameManager::run(int argc, char** argv)
 	}
 
 	return 0;
+}
+
+void GameManager::on_server()
+{
+	httplib::Server server;
+
+	//post
+
+	server.listen(ConfigHomeManager::instance()->get_ip(),
+		ConfigHomeManager::instance()->get_port());
 }
 
 void GameManager::on_input()
@@ -68,6 +84,8 @@ GameManager::GameManager()
 
 	ScreenManager::instance()->add_screen("main_screen", new MainScreen(ResourcesManager::instance()->find_texture("main_background"), "main_screen"));
 	ScreenManager::instance()->on_entry("main_screen");
+
+	player = new Player();
 }
 
 GameManager::~GameManager()

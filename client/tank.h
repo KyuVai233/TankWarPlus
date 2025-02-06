@@ -218,6 +218,7 @@ protected:
 	SDL_Point position_in_map = { 0 };				//在地图中的位置（瓦片数量算）
 
 	bool is_invincible = false;						//是否无敌
+	bool is_visible = true;							//是否可见
 
 	std::function<void()> release_skill;			//主动技能回调
 	std::function<void()> passive_skill;			//被动技能回调

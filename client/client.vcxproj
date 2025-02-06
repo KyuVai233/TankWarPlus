@@ -146,8 +146,11 @@
     <ClInclude Include="config_home_manager.h" />
     <ClInclude Include="game_manager.h" />
     <ClInclude Include="game_mode.h" />
+    <ClInclude Include="image.h" />
+    <ClInclude Include="included_manager.h" />
     <ClInclude Include="main_screen.h" />
     <ClInclude Include="manager.h" />
+    <ClInclude Include="open_server_screen.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="resources_manager.h" />
     <ClInclude Include="screen.h" />
@@ -156,6 +159,10 @@
     <ClInclude Include="tank.h" />
     <ClInclude Include="status_node.h" />
     <ClInclude Include="tank_status_node.h" />
+    <ClInclude Include="team_type.h" />
+    <ClInclude Include="tile.h" />
+    <ClInclude Include="tile_map.h" />
+    <ClInclude Include="tile_type.h" />
     <ClInclude Include="time_timer.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="vector2.h" />
@@ -174,6 +181,7 @@
     <ClCompile Include="screen_manager.cpp" />
     <ClCompile Include="status_machine.cpp" />
     <ClCompile Include="tank.cpp" />
+    <ClCompile Include="tile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

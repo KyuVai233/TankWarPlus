@@ -1,6 +1,7 @@
 #pragma once
 
 #include "tank.h"
+#include "team_type.h"
 
 class Player
 {
@@ -64,10 +65,15 @@ public:
 		return order;
 	}
 
-private:
-	std::string player_id;		//玩家id
-	Identity identity;			//身份
-	Tank* tank = nullptr;		//选择的tank
-	int order = -1;				//行动（座位）序号	
+	void set_team(const TeamType& team)
+	{
+		this->team = team;
+	}
 
+private:
+	std::string player_id;						//玩家id
+	Identity identity = Identity::None;			//身份
+	Tank* tank = nullptr;						//选择的tank
+	int order = -1;								//进入房间序号
+	TeamType team = TeamType::Blue;				//队伍
 };

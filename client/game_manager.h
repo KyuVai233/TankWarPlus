@@ -1,14 +1,17 @@
 #pragma once
 
-#include "manager.h"
-#include "resources_manager.h"
-#include "screen_manager.h"
+#include "included_manager.h"
+#include "player.h"
 #include "util.h"
+
+#include "../thirdparty/httplib.h"
 
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
+
+#include <thread>
 
 class GameManager : public Manager<GameManager>
 {
@@ -16,6 +19,8 @@ class GameManager : public Manager<GameManager>
 
 public:
 	int run(int argc, char** argv);
+
+	void on_server();
 
 	void on_input();
 

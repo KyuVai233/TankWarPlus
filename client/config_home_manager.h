@@ -2,9 +2,10 @@
 
 #include "manager.h"
 #include "game_mode.h"
-#include "player.h"
+#include "config_game_manager.h"
 
 #include <vector>
+#include <string>
 
 class ConfigHomeManager : public Manager<ConfigHomeManager>
 {
@@ -45,11 +46,35 @@ public:
 		return game_mode_list[idx_game_mode]->MIN_PLAYER_NUM;
 	}
 
-	void on_update(float delta);
+	void set_ip(const std::string& ip)
+	{
+		this->ip = ip;
+	}
+
+	const std::string& get_ip() const
+	{
+		return ip;
+	}
+
+	void set_port(int port)
+	{
+		this->port = port;
+	}
+
+	int get_port() const
+	{
+		return port;
+	}
+
+	void on_update(float delta)
+	{
+
+	}
 
 protected:
 	ConfigHomeManager()
 	{
+		player_list.emplace_back(ConfigGameManager::instance()->get_player());
 	}
 
 	~ConfigHomeManager() = default;
@@ -60,4 +85,7 @@ private:
 	GameMode* current_game_mode = nullptr;
 	std::vector<GameMode*> game_mode_list;
 	std::vector<Player*> player_list;
+
+	std::string ip;								//ip
+	int port;									//¶Ë¿Ú
 };

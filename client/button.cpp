@@ -10,5 +10,5 @@ void Button::on_render(SDL_Renderer* renderer)
 	rect_dst.x = position.x, rect_dst.y = position.y;
 	rect_dst.w = size.x, rect_dst.h = size.x;
 
-	draw(renderer, texture, &rect_src, &rect_dst);
+	draw(renderer, current_texture, &rect_src, &rect_dst);
 }
