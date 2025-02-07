@@ -4,8 +4,6 @@
 #include "player.h"
 #include "util.h"
 
-#include "../thirdparty/httplib.h"
-
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
@@ -27,6 +25,8 @@ public:
 	void on_update(float delta);
 
 	void on_render(SDL_Renderer* renderer);
+
+	void to_post();
 
 protected:
 	GameManager();

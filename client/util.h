@@ -1,9 +1,13 @@
 #pragma once
 
 #include "camera.h"
+#include "cjson_write.h"
+#include "cjson_parse.h"
 
 #include <SDL.h>
 #include <SDL_image.h>
+
+#include <string>
 
 //无关摄像机纹理渲染
 inline void draw(SDL_Renderer* renderer, SDL_Texture* texture,

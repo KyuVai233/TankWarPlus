@@ -56,6 +56,16 @@ public:
 		return ip;
 	}
 
+	void set_home_name(const std::string& home_name)
+	{
+		this->home_name = home_name;
+	}
+
+	const std::string& get_home_name() const
+	{
+		return home_name;
+	}
+
 	void set_port(int port)
 	{
 		this->port = port;
@@ -64,6 +74,44 @@ public:
 	int get_port() const
 	{
 		return port;
+	}
+
+	Player* get_action_player() const
+	{
+		return player_list[idx_player];
+	}
+
+	const std::vector<Player*> get_player_list() const
+	{
+		return player_list;
+	}
+
+	void add_player_in_list(Player* player)
+	{
+		player_list.emplace_back(player);
+	}
+
+	void remove_player_in_list(const std::string& player_id)
+	{
+		player_list.erase(std::remove_if(player_list.begin(), player_list.end(),
+			[&](const Player* player)
+			{
+				bool can_remove = player->get_player_id() == player_id;
+				if (can_remove)	delete player;
+				return can_remove;
+			}), player_list.end());
+	}
+
+	void add_idx_player()
+	{
+		idx_player++;
+		if (idx_player >= player_list.size())
+			idx_player = 0;
+	}
+
+	const std::string& get_address() const
+	{
+		return (ip + ":" + std::to_string(port));
 	}
 
 	void on_update(float delta)
@@ -85,7 +133,9 @@ private:
 	GameMode* current_game_mode = nullptr;
 	std::vector<GameMode*> game_mode_list;
 	std::vector<Player*> player_list;
+	int idx_player = 0;							//当前行动玩家
 
+	std::string home_name;						//房间名
 	std::string ip;								//ip
 	int port;									//端口
 };

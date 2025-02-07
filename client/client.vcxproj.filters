@@ -31,9 +31,6 @@
     <Filter Include="头文件\screen\config_home_screen">
       <UniqueIdentifier>{47baeff1-3fb1-4a2f-af51-0f1bffff472d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\screen\config_home_screen\game_mode">
-      <UniqueIdentifier>{87dc4a22-c248-44fa-9bfd-c93647ad9b9a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\init">
       <UniqueIdentifier>{d4d085a3-fcec-4423-8a11-fa280602ca5d}</UniqueIdentifier>
     </Filter>
@@ -52,15 +49,6 @@
     <Filter Include="头文件\init\render">
       <UniqueIdentifier>{ea9cfa85-6864-4f14-a89e-be3244b1131a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\screen\home_screen\tank">
-      <UniqueIdentifier>{3fe06d19-fe91-4eb7-ac96-313fbfd9408d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\screen\home_screen\tank\status_machine">
-      <UniqueIdentifier>{c951f997-dcc4-492e-9b21-f30742b00a45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\screen\home_screen\tank\status_machine\status_node">
-      <UniqueIdentifier>{60f2878a-29c5-498d-9375-a0e7897a5c4c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\manager">
       <UniqueIdentifier>{1b23e0b5-a9a8-4759-93fc-74e28491d7cd}</UniqueIdentifier>
     </Filter>
@@ -69,6 +57,24 @@
     </Filter>
     <Filter Include="头文件\init\tile">
       <UniqueIdentifier>{5065eb89-e781-4d14-985e-03eff31878e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\init\tank">
+      <UniqueIdentifier>{0821763f-2b25-4835-8ae8-4270ff83ad15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\init\tank\tank">
+      <UniqueIdentifier>{3fe06d19-fe91-4eb7-ac96-313fbfd9408d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\init\tank\tank\status_machine">
+      <UniqueIdentifier>{c951f997-dcc4-492e-9b21-f30742b00a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\init\tank\tank\status_machine\status_node">
+      <UniqueIdentifier>{60f2878a-29c5-498d-9375-a0e7897a5c4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\init\game_mode">
+      <UniqueIdentifier>{87dc4a22-c248-44fa-9bfd-c93647ad9b9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\init\util">
+      <UniqueIdentifier>{6f809735-4c75-47c7-aed6-7b7a82fc8aa5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -82,22 +88,22 @@
       <Filter>头文件\screen</Filter>
     </ClInclude>
     <ClInclude Include="tank.h">
-      <Filter>头文件\screen\home_screen\tank</Filter>
+      <Filter>头文件\init\tank\tank</Filter>
     </ClInclude>
     <ClInclude Include="status_node.h">
-      <Filter>头文件\screen\home_screen\tank\status_machine\status_node</Filter>
+      <Filter>头文件\init\tank\tank\status_machine\status_node</Filter>
     </ClInclude>
     <ClInclude Include="tank_status_node.h">
-      <Filter>头文件\screen\home_screen\tank\status_machine\status_node</Filter>
+      <Filter>头文件\init\tank\tank\status_machine\status_node</Filter>
     </ClInclude>
     <ClInclude Include="status_machine.h">
-      <Filter>头文件\screen\home_screen\tank\status_machine</Filter>
+      <Filter>头文件\init\tank\tank\status_machine</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>头文件\player</Filter>
     </ClInclude>
     <ClInclude Include="game_mode.h">
-      <Filter>头文件\screen\config_home_screen\game_mode</Filter>
+      <Filter>头文件\init\game_mode</Filter>
     </ClInclude>
     <ClInclude Include="tile.h">
       <Filter>头文件\init\tile</Filter>
@@ -120,16 +126,10 @@
     <ClInclude Include="button.h">
       <Filter>头文件\screen</Filter>
     </ClInclude>
-    <ClInclude Include="team_type.h">
-      <Filter>头文件\screen\home_screen</Filter>
-    </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>头文件\init\render</Filter>
     </ClInclude>
     <ClInclude Include="vector2.h">
-      <Filter>头文件\init</Filter>
-    </ClInclude>
-    <ClInclude Include="util.h">
       <Filter>头文件\init</Filter>
     </ClInclude>
     <ClInclude Include="animation.h">
@@ -159,6 +159,21 @@
     <ClInclude Include="included_manager.h">
       <Filter>头文件\manager</Filter>
     </ClInclude>
+    <ClInclude Include="team_type.h">
+      <Filter>头文件\init\tank</Filter>
+    </ClInclude>
+    <ClInclude Include="home_screen.h">
+      <Filter>头文件\screen\home_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="util.h">
+      <Filter>头文件\init\util</Filter>
+    </ClInclude>
+    <ClInclude Include="cjson_write.h">
+      <Filter>头文件\init\util</Filter>
+    </ClInclude>
+    <ClInclude Include="cjson_parse.h">
+      <Filter>头文件\init\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\thirdparty\cJSON\cJSON.c">
@@ -171,10 +186,10 @@
       <Filter>头文件\screen</Filter>
     </ClCompile>
     <ClCompile Include="tank.cpp">
-      <Filter>头文件\screen\home_screen\tank</Filter>
+      <Filter>头文件\init\tank\tank</Filter>
     </ClCompile>
     <ClCompile Include="status_machine.cpp">
-      <Filter>头文件\screen\home_screen\tank\status_machine</Filter>
+      <Filter>头文件\init\tank\tank\status_machine</Filter>
     </ClCompile>
     <ClCompile Include="tile.cpp">
       <Filter>头文件\init\tile</Filter>
@@ -196,6 +211,15 @@
     </ClCompile>
     <ClCompile Include="screen_manager.cpp">
       <Filter>头文件\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="wave_manager.cpp">
+      <Filter>头文件\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="open_server_screen.cpp">
+      <Filter>头文件\screen\open_server_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="home_screen.cpp">
+      <Filter>头文件\screen\home_screen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

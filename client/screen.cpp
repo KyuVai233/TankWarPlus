@@ -38,3 +38,13 @@ void Screen::on_render(SDL_Renderer* renderer)
 	for (Button* button : button_list)
 		button->on_render(renderer);
 }
+
+void Screen::to_post()
+{
+
+}
+
+void Screen::do_post()
+{
+
+}

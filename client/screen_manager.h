@@ -25,6 +25,7 @@ public:
 
 	void on_input(const SDL_Event& event);
 	void on_render(SDL_Renderer* renderer);
+	void to_post();
 
 protected:
 	ScreenManager() = default;

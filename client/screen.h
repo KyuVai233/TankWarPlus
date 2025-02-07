@@ -2,6 +2,8 @@
 
 #include "button.h"
 
+#include "../thirdparty/httplib.h"
+
 #include <vector>
 #include <string>
 
@@ -20,6 +22,8 @@ public:
 
 	virtual void on_input(const SDL_Event& event);
 	virtual void on_render(SDL_Renderer* renderer);
+	virtual void to_post();
+	virtual void do_post();
 
 protected:
 	std::string screen_type;

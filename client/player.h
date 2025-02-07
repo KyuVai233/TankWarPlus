@@ -9,16 +9,14 @@ public:
 	//玩家身份
 	enum class Identity
 	{
+		None,					//无
 		Owner,					//房主
 		GamePlayer,				//参与玩家
-		Visitor,				//观战玩家
-		None					//无
+		Visitor					//观战玩家
 	};
 
 public:
-	Player()
-	{
-	}
+	Player() = default;
 
 	~Player()
 	{
@@ -70,10 +68,15 @@ public:
 		this->team = team;
 	}
 
+	void end_the_round()
+	{
+		tank->set_num_action(tank->get_current_speed());
+	}
+
 private:
 	std::string player_id;						//玩家id
 	Identity identity = Identity::None;			//身份
 	Tank* tank = nullptr;						//选择的tank
-	int order = -1;								//进入房间序号
+	int order = -1;								//进入房间序号，-2表示没名字
 	TeamType team = TeamType::Blue;				//队伍
 };

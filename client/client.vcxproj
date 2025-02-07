@@ -142,10 +142,13 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="cjson_parse.h" />
+    <ClInclude Include="cjson_write.h" />
     <ClInclude Include="config_game_manager.h" />
     <ClInclude Include="config_home_manager.h" />
     <ClInclude Include="game_manager.h" />
     <ClInclude Include="game_mode.h" />
+    <ClInclude Include="home_screen.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="included_manager.h" />
     <ClInclude Include="main_screen.h" />
@@ -173,6 +176,9 @@
     <ClCompile Include="..\thirdparty\cJSON\cJSON.c" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="home_screen.cpp" />
+    <ClCompile Include="open_server_screen.cpp" />
+    <ClCompile Include="wave_manager.cpp" />
     <ClCompile Include="game_manager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_screen.cpp" />

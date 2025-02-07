@@ -83,6 +83,21 @@ public:
 		return current_speed;
 	}
 
+	void add_num_actioned()
+	{
+		num_actioned++;
+	}
+
+	int get_num_actioned() const
+	{
+		return num_actioned;
+	}
+
+	void set_num_action(int val)
+	{
+		num_actioned = val;
+	}
+
 	void add_attack_power(int val)
 	{
 		current_attack_power += val;
@@ -211,6 +226,7 @@ protected:
 
 	int current_hp = 80;							//当前血量
 	int current_speed = 8;							//当前速度
+	int num_actioned = 0;							//已经行动的次数
 	int current_attack_power = 18;					//当前攻击力
 	int num_ammo = 1;								//当前弹药数量
 	int visible_range = 8;							//当前视野范围

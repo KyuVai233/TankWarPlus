@@ -18,6 +18,8 @@ int GameManager::run(int argc, char** argv)
 			on_input();
 		}
 
+		to_post();
+
 		Uint64 current_counter = SDL_GetPerformanceCounter();
 		float delta = (float)(current_counter - last_counter) / counter_freq;
 		last_counter = current_counter;
@@ -39,11 +41,9 @@ int GameManager::run(int argc, char** argv)
 
 void GameManager::on_server()
 {
-	httplib::Server server;
-
 	//post
 
-	server.listen(ConfigHomeManager::instance()->get_ip(),
+	ConfigGameManager::instance()->server.listen(ConfigHomeManager::instance()->get_ip(),
 		ConfigHomeManager::instance()->get_port());
 }
 
@@ -60,6 +60,11 @@ void GameManager::on_update(float delta)
 void GameManager::on_render(SDL_Renderer* renderer)
 {
 	ScreenManager::instance()->on_render(renderer);
+}
+
+void GameManager::to_post()
+{
+	ScreenManager::instance()->to_post();
 }
 
 
@@ -84,8 +89,6 @@ GameManager::GameManager()
 
 	ScreenManager::instance()->add_screen("main_screen", new MainScreen(ResourcesManager::instance()->find_texture("main_background"), "main_screen"));
 	ScreenManager::instance()->on_entry("main_screen");
-
-	player = new Player();
 }
 
 GameManager::~GameManager()
