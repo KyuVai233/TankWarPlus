@@ -1,9 +1,10 @@
 #pragma once
 
 #include "screen.h"
-#include "config_game_manager.h"
 #include "config_home_manager.h"
 #include "util.h"
+
+#include <mutex>
 
 class HomeScreen : public Screen
 {

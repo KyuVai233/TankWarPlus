@@ -1,13 +1,14 @@
 #pragma once
 
-#include "manager.h"
-#include "config_home_manager.h"
-
-class WaveManager : public Manager<WaveManager>
+class Wave
 {
-	friend class Manager<WaveManager>;
-
 public:
+	static Wave* instance()
+	{
+		static Wave* instance;		// 静态局部变量，保证唯一性
+		return instance;
+	}
+
 	int get_current_wave() const
 	{
 		return current_wave;
@@ -15,12 +16,9 @@ public:
 
 	void restart();
 
-	void on_update(float delta);
-
 protected:
-	WaveManager() = default;
-
-	~WaveManager() = default;
+	Wave() = default;
+	~Wave() = default;
 
 private:
 	int current_wave = 0;			//当前波数

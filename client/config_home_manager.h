@@ -3,6 +3,7 @@
 #include "manager.h"
 #include "game_mode.h"
 #include "config_game_manager.h"
+#include "player.h"
 
 #include <vector>
 #include <string>
@@ -81,7 +82,7 @@ public:
 		return player_list[idx_player];
 	}
 
-	const std::vector<Player*> get_player_list() const
+	std::vector<Player*> get_player_list() const
 	{
 		return player_list;
 	}

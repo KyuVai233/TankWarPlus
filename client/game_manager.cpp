@@ -5,7 +5,7 @@ int GameManager::run(int argc, char** argv)
 	if (ConfigGameManager::instance()->get_player()->get_identity() 
 		== Player::Identity::Owner)
 	{
-		std::thread thread_on_server(on_server);
+		std::thread thread_on_server(&GameManager::on_server, this);
 	}
 
 	Uint64 last_counter = SDL_GetPerformanceCounter();

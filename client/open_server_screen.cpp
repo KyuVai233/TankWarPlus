@@ -1,5 +1,15 @@
 #include "open_server_screen.h"
 
+void OpenServerScreen::on_input(const SDL_Event& event)
+{
+
+}
+
+void OpenServerScreen::on_render(SDL_Renderer* renderer)
+{
+
+}
+
 void OpenServerScreen::to_post()
 {
 	ConfigGameManager* instance = ConfigGameManager::instance();

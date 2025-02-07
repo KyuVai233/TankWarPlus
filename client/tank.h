@@ -1,11 +1,9 @@
 #pragma once
 
 #include "animation.h"
-#include "config_game_manager.h"
 #include "status_machine.h"
 #include "tank_status_node.h"
 #include "wave_timer.h"
-#include "vector2.h"
 
 #include <SDL.h>
 
@@ -223,6 +221,7 @@ protected:
 	const int INITIAL_ATTACK_POWER = 18;			//初始攻击力
 	const int MAX_AMMO_NUM = 1;						//最大弹夹量
 	const int INITIAL_VISIBLE_RANGE = 8;			//最大视野范围
+	const int MAX_TANK_SPEED = 15;
 
 	int current_hp = 80;							//当前血量
 	int current_speed = 8;							//当前速度

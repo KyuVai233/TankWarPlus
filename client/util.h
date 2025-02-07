@@ -7,8 +7,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include <string>
-
 //无关摄像机纹理渲染
 inline void draw(SDL_Renderer* renderer, SDL_Texture* texture,
 	const SDL_Rect* rect_src, const SDL_Rect* rect_dst, double angle = 0)

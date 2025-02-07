@@ -1,6 +1,6 @@
 #pragma once
 
-#include "wave_manager.h"
+#include "wave.h"
 
 #include <functional>
 
@@ -12,7 +12,7 @@ public:
 
 	void restart()
 	{
-		final_wave = WaveManager::instance()->get_current_wave() + wait_wave;
+		final_wave = Wave::instance()->get_current_wave() + wait_wave;
 		shotted = false;
 	}
 
@@ -43,14 +43,14 @@ public:
 
 	int get_remaining_wave() const
 	{
-		return final_wave - WaveManager::instance()->get_current_wave();
+		return final_wave - Wave::instance()->get_current_wave();
 	}
 
 	void on_update()
 	{
 		if (paused)	return;
 
-		if (WaveManager::instance()->get_current_wave() >= final_wave)
+		if (Wave::instance()->get_current_wave() >= final_wave)
 		{
 			bool can_shot = (!one_shot || (one_shot && !shotted));
 			shotted = true;

@@ -76,6 +76,9 @@
     <Filter Include="头文件\init\util">
       <UniqueIdentifier>{6f809735-4c75-47c7-aed6-7b7a82fc8aa5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\init\wave">
+      <UniqueIdentifier>{273e53e7-ba5e-4be9-835f-e49f31a77628}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="time_timer.h">
@@ -153,9 +156,6 @@
     <ClInclude Include="screen_manager.h">
       <Filter>头文件\manager</Filter>
     </ClInclude>
-    <ClInclude Include="wave_manager.h">
-      <Filter>头文件\manager</Filter>
-    </ClInclude>
     <ClInclude Include="included_manager.h">
       <Filter>头文件\manager</Filter>
     </ClInclude>
@@ -173,6 +173,9 @@
     </ClInclude>
     <ClInclude Include="cjson_parse.h">
       <Filter>头文件\init\util</Filter>
+    </ClInclude>
+    <ClInclude Include="wave.h">
+      <Filter>头文件\init\wave</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,14 +215,14 @@
     <ClCompile Include="screen_manager.cpp">
       <Filter>头文件\manager</Filter>
     </ClCompile>
-    <ClCompile Include="wave_manager.cpp">
-      <Filter>头文件\manager</Filter>
-    </ClCompile>
     <ClCompile Include="open_server_screen.cpp">
       <Filter>头文件\screen\open_server_screen</Filter>
     </ClCompile>
     <ClCompile Include="home_screen.cpp">
       <Filter>头文件\screen\home_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="wave.cpp">
+      <Filter>头文件\init\wave</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
