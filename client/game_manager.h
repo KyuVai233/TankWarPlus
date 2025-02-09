@@ -1,6 +1,7 @@
 #pragma once
 
 #include "included_manager.h"
+#include "included_screen.h"
 #include "player.h"
 #include "util.h"
 
@@ -27,6 +28,8 @@ public:
 	void on_render(SDL_Renderer* renderer);
 
 	void to_post();
+
+	void do_post();
 
 protected:
 	GameManager();

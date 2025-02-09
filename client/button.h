@@ -33,13 +33,34 @@ public:
 		is_usable = flag;
 	}
 
+	void set_is_click_left(bool flag)
+	{
+		is_clicked_left = flag;
+	}
+
+	bool get_is_clicked_left() const
+	{
+		return is_clicked_left;
+	}
+
+	void set_is_click_right(bool flag)
+	{
+		is_clicked_right = flag;
+	}
+	
+	bool get_is_clicked_right() const
+	{
+		return is_clicked_right;
+	}
+
 	void set_on_left_clicked(std::function<void()> on_left_clicked)
 	{
 		this->on_left_clicked = on_left_clicked;
 	}
 
-	void take_on_left_clicked()	const
+	void take_on_left_clicked()
 	{
+		is_clicked_left = false;
 		if (on_left_clicked)	on_left_clicked();
 	}
 
@@ -48,8 +69,9 @@ public:
 		this->on_right_clicked = on_right_clicked;
 	}
 
-	void take_on_right_clicked()	const
+	void take_on_right_clicked()
 	{
+		is_clicked_right = false;
 		if (on_right_clicked)	on_right_clicked();
 	}
 
@@ -71,6 +93,8 @@ private:
 	SDL_Texture* texture_covered = nullptr;		//按钮被覆盖纹理
 	SDL_Texture* texture_clicked = nullptr;		//按钮被点击纹理
 	SDL_Texture* current_texture = texture_idle;//按钮当前纹理
+	bool is_clicked_left = false;				//是否被左击
+	bool is_clicked_right = false;				//是否被右击
 
 	std::function<void()> on_left_clicked;		//按左键抬起后执行回调
 	std::function<void()> on_right_clicked;		//按右键抬起后执行回调

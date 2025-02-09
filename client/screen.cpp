@@ -22,6 +22,17 @@ void Screen::on_input(const SDL_Event& event)
 	}
 }
 
+void Screen::on_update(float delta)
+{
+	for (Button* button : button_list)
+	{
+		if (button->get_is_clicked_left())
+			button->take_on_left_clicked();
+		else if (button->get_is_clicked_right())
+			button->take_on_right_clicked();
+	}
+}
+
 void Screen::on_render(SDL_Renderer* renderer)
 {
 	if (!tex_background)	return;
@@ -44,7 +55,7 @@ void Screen::to_post()
 
 }
 
-void Screen::do_post()
+void Screen::do_post(float delta)
 {
 
 }

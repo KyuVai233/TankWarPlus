@@ -159,9 +159,6 @@
     <ClInclude Include="included_manager.h">
       <Filter>头文件\manager</Filter>
     </ClInclude>
-    <ClInclude Include="team_type.h">
-      <Filter>头文件\init\tank</Filter>
-    </ClInclude>
     <ClInclude Include="home_screen.h">
       <Filter>头文件\screen\home_screen</Filter>
     </ClInclude>
@@ -176,6 +173,12 @@
     </ClInclude>
     <ClInclude Include="wave.h">
       <Filter>头文件\init\wave</Filter>
+    </ClInclude>
+    <ClInclude Include="team_type.h">
+      <Filter>头文件\init</Filter>
+    </ClInclude>
+    <ClInclude Include="included_screen.h">
+      <Filter>头文件\screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

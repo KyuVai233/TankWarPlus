@@ -32,19 +32,19 @@ public:
 		return game_mode_list[idx_game_mode]->game_mode_name;
 	}
 
-	int get_player_num() const
+	int get_num_player() const
 	{
 		return player_list.size();
 	}
 
-	const int get_max_player_num() const
+	const int get_max_num_player() const
 	{
-		return game_mode_list[idx_game_mode]->MAX_PLAYER_NUM;
+		return game_mode_list[idx_game_mode]->MAX_NUM_PLAYER;
 	}
 	
-	const int get_mim_player_num() const
+	const int get_mim_num_player() const
 	{
-		return game_mode_list[idx_game_mode]->MIN_PLAYER_NUM;
+		return game_mode_list[idx_game_mode]->MIN_NUM_PLAYER;
 	}
 
 	void set_ip(const std::string& ip)
@@ -92,6 +92,21 @@ public:
 		player_list.emplace_back(player);
 	}
 
+	void add_num_visitor()
+	{
+		num_visitor++;
+	}
+
+	void set_num_visitor(int num_visitor)
+	{
+		this->num_visitor = num_visitor;
+	}
+
+	int get_num_visitor() const
+	{
+		return num_visitor;
+	}
+
 	void remove_player_in_list(const std::string& player_id)
 	{
 		player_list.erase(std::remove_if(player_list.begin(), player_list.end(),
@@ -117,7 +132,7 @@ public:
 
 	void on_update(float delta)
 	{
-
+		on_hearted(delta);
 	}
 
 protected:
@@ -134,9 +149,26 @@ private:
 	GameMode* current_game_mode = nullptr;
 	std::vector<GameMode*> game_mode_list;
 	std::vector<Player*> player_list;
+	int num_visitor = 0;						//当前观战人数
 	int idx_player = 0;							//当前行动玩家
 
 	std::string home_name;						//房间名
 	std::string ip;								//ip
 	int port;									//端口
+
+private:
+	void on_hearted(float delta)
+	{
+		if(ConfigGameManager::instance()->get_player()->get_identity() != Player::Identity::Owner)
+			for(Player* player : player_list)
+			{
+				if (player->get_last_time_hearted() >= player->get_MAX_TIME_OUT())
+					player->set_is_time_out(true);
+				else
+				{
+					float last_time = player->get_last_time_hearted() + delta;
+					player->set_last_time_hearted(last_time);
+				}
+			}
+	}
 };

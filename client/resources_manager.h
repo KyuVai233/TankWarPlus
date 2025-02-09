@@ -18,25 +18,8 @@ public:
 	//º”‘ÿ◊ ‘¥
 	void load(SDL_Renderer* renderer);
 
-	Mix_Chunk* find_audio(const std::string& name)
-	{
-		if (!audio_pool[name])
-		{
-			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, u8"“Ù¿÷º”‘ÿ¥ÌŒÛ", name.c_str(), nullptr);
-			return nullptr;
-		}
-		return audio_pool[name];
-	}
-
-	SDL_Texture* find_texture(const std::string& name)
-	{
-		if (!texture_pool[name])
-		{
-			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, u8"Õº∆¨º”‘ÿ¥ÌŒÛ", name.c_str(), nullptr);
-			return nullptr;
-		}
-		return texture_pool[name];
-	}
+	Mix_Chunk* find_audio(const std::string& name);
+	SDL_Texture* find_texture(const std::string& name);
 
 protected:
 	ResourcesManager() = default;

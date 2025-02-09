@@ -4,29 +4,29 @@
 
 #include <string>
 
-//±‡–¥"/get_player_list" cJSON
-inline const std::string& write_get_player_list(const std::string& player_id, int identity)
+//±‡–¥str+int
+inline const std::string& write_cJSON_string_and_int(const std::string& str, int num_int)
 {
-	std::string str_player;
-	cJSON* cJSON_player = cJSON_CreateObject();
-	cJSON* cJSON_player_id;
-	cJSON* cJSON_identity;
-	if (!cJSON_player)
+	std::string str_json;
+	cJSON* cJSON_write_str = cJSON_CreateObject();
+	cJSON* cJSON_str;
+	cJSON* cJSON_num_int;
+	if (!cJSON_write_str)
 		goto end;
 
-	cJSON_player_id = cJSON_CreateString(player_id.c_str());
-	if (!cJSON_player_id)
+	cJSON_str = cJSON_CreateString(str.c_str());
+	if (!cJSON_str)
 		goto end;
-	cJSON_AddItemToObject(cJSON_player, "player_id", cJSON_player_id);
+	cJSON_AddItemToObject(cJSON_write_str, "str", cJSON_str);
 
-	cJSON_identity = cJSON_CreateNumber(identity);
-	if (!cJSON_identity)
+	cJSON_num_int = cJSON_CreateNumber(num_int);
+	if (!cJSON_num_int)
 		goto end;
-	cJSON_AddItemToObject(cJSON_player, "identity", cJSON_identity);
+	cJSON_AddItemToObject(cJSON_write_str, "num_int", cJSON_num_int);
 
-	str_player = cJSON_Print(cJSON_player);
+	str_json = cJSON_Print(cJSON_write_str);
 
 end:
-	cJSON_Delete(cJSON_player);
-	return str_player;
+	cJSON_Delete(cJSON_write_str);
+	return str_json;
 }

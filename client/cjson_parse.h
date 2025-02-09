@@ -4,28 +4,28 @@
 
 #include <string>
 
-//解析"/get_player_list" json，参数赋值
-inline bool parse_get_player_list(const std::string& str_player, std::string player_id, int identity)
+//解析str+int
+inline bool parse_cJSON_string_and_int(const std::string& str_json, std::string str, int num_int)
 {
-	cJSON* parse_player = cJSON_Parse(str_player.c_str());
-	cJSON* cJSON_player_id;
-	cJSON* cJSON_identity;
-	if (!parse_player)
+	cJSON* cJSON_parse_str = cJSON_Parse(str_json.c_str());
+	cJSON* cJSON_str;
+	cJSON* cJSON_num_int;
+	if (!cJSON_parse_str)
 		goto end;
 
-	cJSON_player_id = cJSON_GetObjectItemCaseSensitive(parse_player, "player_id");
-	if (cJSON_IsString(cJSON_player_id) || !cJSON_player_id->valuestring)
+	cJSON_str = cJSON_GetObjectItemCaseSensitive(cJSON_parse_str, "str");
+	if (cJSON_IsString(cJSON_str) || !cJSON_str->valuestring)
 		goto end;
-	player_id = cJSON_player_id->valuestring;
+	str = cJSON_str->valuestring;
 
-	cJSON_identity = cJSON_GetObjectItemCaseSensitive(parse_player, "identity");
-	if (cJSON_IsNumber(cJSON_identity))
+	cJSON_num_int = cJSON_GetObjectItemCaseSensitive(cJSON_parse_str, "num_int");
+	if (cJSON_IsNumber(cJSON_num_int))
 		goto end;
-	identity = cJSON_player_id->valueint;
-	cJSON_Delete(parse_player);
+	num_int = cJSON_str->valueint;
+	cJSON_Delete(cJSON_parse_str);
 	return true;
 
 end:
-	cJSON_Delete(parse_player);
+	cJSON_Delete(cJSON_parse_str);
 	return false;
 }

@@ -7,5 +7,6 @@ enum class TeamType
 	Yellow,
 	Green,
 	Pink,
-	Orange
+	Orange,
+	White		//╧шу╫
 };

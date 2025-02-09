@@ -16,6 +16,11 @@ void ScreenManager::on_input(const SDL_Event& event)
 	current_screen->on_input(event);
 }
 
+void ScreenManager::on_update(float delta)
+{
+
+}
+
 void ScreenManager::on_render(SDL_Renderer* renderer)
 {
 	current_screen->on_render(renderer);
@@ -24,4 +29,9 @@ void ScreenManager::on_render(SDL_Renderer* renderer)
 void ScreenManager::to_post()
 {
 	current_screen->to_post();
+}
+
+void ScreenManager::do_post(float delta)
+{
+	current_screen->do_post(delta);
 }

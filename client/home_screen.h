@@ -14,14 +14,16 @@ public:
 	{
 	}
 
-	~HomeScreen()
-	{
-	}
+	~HomeScreen() = default;
 
-	void do_post() override;
+	void on_update(float delta) override;
+
+	void do_post(float delta) override;
+
+	void to_post() override;
 
 private:
 	bool is_bulit = false;
-	std::mutex mutex_join;
+	std::mutex mutex_join_or_switch;
 	std::mutex mutex_get_player_list;
 };

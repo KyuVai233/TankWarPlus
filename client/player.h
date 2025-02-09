@@ -63,9 +63,14 @@ public:
 		return order;
 	}
 
-	void set_team(const TeamType& team)
+	void set_team_type(const TeamType& team)
 	{
 		this->team = team;
+	}
+
+	const TeamType& get_team_type() const
+	{
+		return team;
 	}
 
 	void end_the_round()
@@ -73,10 +78,44 @@ public:
 		tank->set_num_action(tank->get_current_speed());
 	}
 
+	void set_last_time_hearted(float val)
+	{
+		last_time_hearted = val;
+	}
+
+	float get_last_time_hearted() const
+	{
+		return last_time_hearted;
+	}
+
+	void set_is_time_out(bool flag)
+	{
+		is_time_out = flag;
+	}
+
+	bool get_is_time_out() const
+	{
+		return is_time_out;
+	}
+
+	const float get_MAX_TIME_OUT() const
+	{
+		return MAX_TIME_OUT;
+	}
+
 private:
 	std::string player_id;						//玩家id
 	Identity identity = Identity::None;			//身份
 	Tank* tank = nullptr;						//选择的tank
-	int order = -1;								//进入房间序号，-2表示没名字
+	int order = -1;								//0开始
+	/*
+	error
+	-1 没名字
+	-2 请求操作失败
+	*/
 	TeamType team = TeamType::Blue;				//队伍
+
+	float last_time_hearted;					//最后心跳时间
+	bool is_time_out = false;					//是否超时
+	const float MAX_TIME_OUT = 10000.0f;		//最大超时时间(ms)
 };
