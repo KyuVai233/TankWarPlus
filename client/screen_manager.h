@@ -28,6 +28,7 @@ public:
 	void on_render(SDL_Renderer* renderer);
 	void to_post();
 	void do_post(float delta);
+	void handle_quit();
 
 protected:
 	ScreenManager() = default;

@@ -59,3 +59,8 @@ void Screen::do_post(float delta)
 {
 
 }
+
+void Screen::handle_quit()
+{
+
+}

@@ -23,6 +23,14 @@ void HomeScreen::do_post(float delta)
 			}
 			if (player_id.empty())
 				order = -1;
+			for (Player* player : instance->get_player_list())
+			{
+				if (player->get_player_id() == player_id)
+				{
+					order = -1;
+					break;
+				}
+			}
 			res.set_content(std::to_string(order), "text/plain");
 			if (order == -1)
 				return;
@@ -104,4 +112,16 @@ void HomeScreen::do_post(float delta)
 void HomeScreen::to_post()
 {
 
+}
+
+void HomeScreen::handle_quit()
+{
+	ConfigHomeManager* instance = ConfigHomeManager::instance();
+	for (Player* player : instance->get_player_list())
+	{
+		if (player->get_is_time_out())
+		{
+			instance->remove_player_in_list(player->get_player_id());
+		}
+	}
 }

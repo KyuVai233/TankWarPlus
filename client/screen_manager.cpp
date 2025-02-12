@@ -18,7 +18,7 @@ void ScreenManager::on_input(const SDL_Event& event)
 
 void ScreenManager::on_update(float delta)
 {
-
+	handle_quit();
 }
 
 void ScreenManager::on_render(SDL_Renderer* renderer)
@@ -34,4 +34,9 @@ void ScreenManager::to_post()
 void ScreenManager::do_post(float delta)
 {
 	current_screen->do_post(delta);
+}
+
+void ScreenManager::handle_quit()
+{
+	current_screen->handle_quit();
 }

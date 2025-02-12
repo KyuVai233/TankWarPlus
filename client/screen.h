@@ -25,6 +25,8 @@ public:
 	virtual void on_render(SDL_Renderer* renderer);
 	virtual void to_post();
 	virtual void do_post(float delta);
+	//处理玩家掉线和退出
+	virtual void handle_quit();
 
 protected:
 	std::string screen_type;

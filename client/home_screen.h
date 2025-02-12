@@ -22,6 +22,8 @@ public:
 
 	void to_post() override;
 
+	void handle_quit() override;
+
 private:
 	bool is_bulit = false;
 	std::mutex mutex_join_or_switch;
