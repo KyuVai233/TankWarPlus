@@ -2,12 +2,17 @@
 
 void OpenServerScreen::on_input(const SDL_Event& event)
 {
+	Screen::on_input(event);
+}
 
+void OpenServerScreen::on_update(float delta)
+{
+	Screen::on_update(delta);
 }
 
 void OpenServerScreen::on_render(SDL_Renderer* renderer)
 {
-
+	Screen::on_render(renderer);
 }
 
 void OpenServerScreen::to_post()

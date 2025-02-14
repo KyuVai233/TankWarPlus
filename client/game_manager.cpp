@@ -17,7 +17,7 @@ int GameManager::run(int argc, char** argv)
 	{
 		while (SDL_PollEvent(&event))
 		{
-			on_input();
+			on_input(event);
 		}
 
 		Uint64 current_counter = SDL_GetPerformanceCounter();
@@ -52,14 +52,15 @@ void GameManager::on_server()
 	//listen
 }
 
-void GameManager::on_input()
+void GameManager::on_input(const SDL_Event& event)
 {
-
+	ScreenManager::instance()->on_input(event);
 }
 
 void GameManager::on_update(float delta)
 {
 	ConfigHomeManager::instance()->on_update(delta);
+	ScreenManager::instance()->on_update(delta);
 }
 
 void GameManager::on_render(SDL_Renderer* renderer)

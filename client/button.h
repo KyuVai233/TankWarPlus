@@ -18,9 +18,16 @@ public:
 		this->position = position;
 	}
 
-	void set_size(const Vector2& position)
+	void set_size(const Vector2& size)
 	{
 		this->size = size;
+	}
+
+	const Vector2& get_initial_size()
+	{
+		int width, height;
+		SDL_QueryTexture(texture_idle, nullptr, nullptr, &width, &height);
+		return { (float)width,(float)height };
 	}
 
 	void set_is_visible(bool flag)
@@ -85,7 +92,7 @@ public:
 	void on_render(SDL_Renderer* renderer);
 
 private:
-	Vector2 position;							//位置
+	Vector2 position = { 0,0 };					//位置
 	Vector2 size;								//大小
 	bool is_visible = true;						//是否可见
 	bool is_usable = true;						//是否可用

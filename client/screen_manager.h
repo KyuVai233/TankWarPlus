@@ -12,16 +12,13 @@ class ScreenManager : public Manager<ScreenManager>
 
 public:
 	//设置开始界面
-	void on_entry(const std::string& screen_id)
-	{
-		current_screen = screen_pool[screen_id];
-	}
+	void on_entry(const std::string& screen_id);
 
 	//添加界面
 	void add_screen(const std::string& screen_id, Screen* screen);
 
 	//跳转界面
-	void switch_screen(const std::string& screen_id);
+	void switch_screen();
 
 	void on_input(const SDL_Event& event);
 	void on_update(float delta);

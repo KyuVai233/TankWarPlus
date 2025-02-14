@@ -21,7 +21,7 @@ public:
 
 	void on_server();
 
-	void on_input();
+	void on_input(const SDL_Event& event);
 
 	void on_update(float delta);
 

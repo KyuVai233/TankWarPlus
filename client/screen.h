@@ -20,6 +20,11 @@ public:
 		this->next_screen = next_screen;
 	}
 
+	const std::string& get_next_screen() const
+	{
+		return next_screen;
+	}
+
 	virtual void on_input(const SDL_Event& event);
 	virtual void on_update(float delta);
 	virtual void on_render(SDL_Renderer* renderer);

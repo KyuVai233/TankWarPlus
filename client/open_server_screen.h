@@ -17,6 +17,8 @@ public:
 
 	void on_input(const SDL_Event& event) override;
 
+	void on_update(float delta) override;
+
 	void on_render(SDL_Renderer* renderer) override;
 
 	void to_post() override;

@@ -11,9 +11,9 @@ void Screen::on_input(const SDL_Event& event)
 			if (button->check_in_button(pos_cursor.x, pos_cursor.y))
 			{
 				if (event.button.button == SDL_BUTTON_LEFT)
-					button->take_on_left_clicked();
+					button->set_is_click_left(true);
 				else if (event.button.button == SDL_BUTTON_RIGHT)
-					button->take_on_right_clicked();
+					button->set_is_click_right(true);
 			}
 		}
 		break;
