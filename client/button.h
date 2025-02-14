@@ -3,7 +3,10 @@
 #include "vector2.h"
 #include "util.h"
 
+#include <SDL_mixer.h>
+
 #include <functional>
+#include <iostream>
 
 class Button
 {
@@ -60,6 +63,26 @@ public:
 		return is_clicked_right;
 	}
 
+	void set_music_covered(Mix_Chunk* music)
+	{
+		music_covered = music;
+	}
+
+	Mix_Chunk* get_music_covered() const
+	{
+		return music_covered;
+	}
+
+	void set_music_clicked(Mix_Chunk* music)
+	{
+		music_clicked = music;
+	}
+
+	Mix_Chunk* get_music_clicked() const
+	{
+		return music_clicked;
+	}
+
 	void set_on_left_clicked(std::function<void()> on_left_clicked)
 	{
 		this->on_left_clicked = on_left_clicked;
@@ -102,6 +125,8 @@ private:
 	SDL_Texture* current_texture = texture_idle;//按钮当前纹理
 	bool is_clicked_left = false;				//是否被左击
 	bool is_clicked_right = false;				//是否被右击
+	Mix_Chunk* music_covered = nullptr;			//鼠标悬浮时播放音效
+	Mix_Chunk* music_clicked = nullptr;			//被点击时音效
 
 	std::function<void()> on_left_clicked;		//按左键抬起后执行回调
 	std::function<void()> on_right_clicked;		//按右键抬起后执行回调

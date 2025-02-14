@@ -27,9 +27,15 @@ void Screen::on_update(float delta)
 	for (Button* button : button_list)
 	{
 		if (button->get_is_clicked_left())
+		{
+			Mix_PlayChannel(-1, button->get_music_clicked(), 0);
 			button->take_on_left_clicked();
+		}
 		else if (button->get_is_clicked_right())
+		{
+			Mix_PlayChannel(-1, button->get_music_clicked(), 0);
 			button->take_on_right_clicked();
+		}
 	}
 }
 
