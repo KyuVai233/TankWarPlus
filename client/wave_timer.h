@@ -16,7 +16,7 @@ public:
 		shotted = false;
 	}
 
-	void set_wait_wave(float val)
+	void set_wait_wave(int val)
 	{
 		wait_wave = val;
 	}

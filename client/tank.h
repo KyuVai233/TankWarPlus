@@ -1,6 +1,7 @@
 #pragma once
 
 #include "animation.h"
+#include "effect.h"
 #include "status_machine.h"
 #include "tank_status_node.h"
 #include "wave_timer.h"
@@ -71,11 +72,6 @@ public:
 
 	void set_speed(int val);
 
-	void init_speed()
-	{
-		current_speed = INITIAL_SPEED;
-	}
-
 	int get_current_speed() const
 	{
 		return current_speed;
@@ -116,11 +112,6 @@ public:
 	{
 		int val = (int)((percentage / 100) * current_attack_power);
 		decrease_attack_power(val);
-	}
-
-	void init_attack_power()
-	{
-		current_attack_power = INITIAL_ATTACK_POWER;
 	}
 
 	int get_current_attack_power() const
@@ -174,6 +165,16 @@ public:
 		return position_in_map;
 	}
 
+	float get_defense() const
+	{
+		return defense;
+	}
+
+	void set_defense(float val)
+	{
+		defense = val;
+	}
+
 	void set_is_invincible(bool flag)
 	{
 		is_invincible = flag;
@@ -204,6 +205,11 @@ public:
 		status_machine.switch_status(id);
 	}
 
+	void add_effect(Effect* effect)
+	{
+		effect_list.emplace_back(effect);
+	}
+
 	void set_animation(const std::string& id);
 protected:
 
@@ -217,8 +223,6 @@ protected:
 
 protected:
 	const int MAX_HP = 80;							//最大生命值
-	const int INITIAL_SPEED = 8;					//初始速度
-	const int INITIAL_ATTACK_POWER = 18;			//初始攻击力
 	const int MAX_AMMO_NUM = 1;						//最大弹夹量
 	const int INITIAL_VISIBLE_RANGE = 8;			//最大视野范围
 	const int MAX_TANK_SPEED = 15;
@@ -231,6 +235,8 @@ protected:
 	int visible_range = 8;							//当前视野范围
 
 	SDL_Point position_in_map = { 0 };				//在地图中的位置（瓦片数量算）
+
+	float defense = 0;								//防御（百分比）
 
 	bool is_invincible = false;						//是否无敌
 	bool is_visible = true;							//是否可见
@@ -245,6 +251,8 @@ protected:
 	Direction direction = Direction::Left;			//tank方向
 	TankType tank_type = TankType::Little;			//tank类型
 	StatusMachine status_machine;					//状态机
+
+	std::vector<Effect*> effect_list;				//效果表
 
 	AnimationGroup* current_animation = nullptr;	//当前动画
 	std::unordered_map<std::string, AnimationGroup> animaton_pool;

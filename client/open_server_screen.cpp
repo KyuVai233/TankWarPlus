@@ -2,12 +2,70 @@
 
 void OpenServerScreen::on_input(const SDL_Event& event)
 {
-	Screen::on_input(event);
+	SDL_Point pos_cursor = { event.motion.x,event.motion.y };
+	switch (event.type)
+	{
+	case SDL_MOUSEBUTTONUP:
+		for (Button* button : button_list)
+		{
+			if (button->check_in_button(pos_cursor.x, pos_cursor.y))
+			{
+				if (event.button.button == SDL_BUTTON_LEFT)
+					button->set_is_click_left(true);
+				else if (event.button.button == SDL_BUTTON_RIGHT)
+					button->set_is_click_right(true);
+			}
+		}
+		break;
+	case SDL_KEYDOWN:
+		if (event.key.keysym.scancode == SDL_SCANCODE_BACKSPACE)
+		{
+			if (is_write_ip)
+				str_ip.pop_back();
+			if (is_write_port)
+				str_port.pop_back();
+		}
+		break;
+	case SDL_TEXTINPUT:
+		const char* word = event.text.text;
+		for(int i = 0; word[i] != '\0'; i++)
+		{
+			if (is_write_ip)
+				if (isalnum(word[i]) || word[i] == '.')
+					str_ip += word[i];
+				else if (is_write_port)
+					if (word[i] >= '0' && word[i] <= '9')
+						str_port += word[i];
+		}
+		break;
+	default:
+		break;
+	}
 }
 
 void OpenServerScreen::on_update(float delta)
 {
 	Screen::on_update(delta);
+
+	//Æ¥Åäip
+	if (!is_write_ip && !str_ip.empty())
+	{
+		std::regex pattern_ip("^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$");
+		if (std::regex_match(str_ip, pattern_ip))
+		{
+			ConfigHomeManager::instance()->set_ip(str_ip);
+		}
+	}
+
+	//Æ¥Åä¶Ë¿Ú
+	if (!is_write_port && !str_port.empty())
+	{
+		std::regex pattern_port("^(0|[1-9]\d{0,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$");
+		if (std::regex_match(str_port, pattern_port))
+		{
+			ConfigHomeManager::instance()->set_port(std::atoi(str_port.c_str()));
+		}
+	}
 }
 
 void OpenServerScreen::on_render(SDL_Renderer* renderer)

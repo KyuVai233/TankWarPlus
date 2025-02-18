@@ -16,7 +16,7 @@ void Tank::add_hp(double percentage)
 void Tank::decrease_hp(int val)
 {
 	if (!is_invincible)
-		current_hp -= val;
+		current_hp -= val * (1 - defense);
 }
 
 void Tank::set_speed(int val)

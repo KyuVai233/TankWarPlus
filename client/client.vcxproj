@@ -146,6 +146,7 @@
     <ClInclude Include="cjson_write.h" />
     <ClInclude Include="config_game_manager.h" />
     <ClInclude Include="config_home_manager.h" />
+    <ClInclude Include="effect.h" />
     <ClInclude Include="game_manager.h" />
     <ClInclude Include="game_mode.h" />
     <ClInclude Include="home_screen.h" />

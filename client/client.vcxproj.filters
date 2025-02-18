@@ -79,6 +79,9 @@
     <Filter Include="头文件\init\wave">
       <UniqueIdentifier>{273e53e7-ba5e-4be9-835f-e49f31a77628}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\init\effect">
+      <UniqueIdentifier>{3d6afacb-6f53-4fc4-aa11-8e00f6f6bf55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="time_timer.h">
@@ -179,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="included_screen.h">
       <Filter>头文件\screen</Filter>
+    </ClInclude>
+    <ClInclude Include="effect.h">
+      <Filter>头文件\init\effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
