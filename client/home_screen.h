@@ -20,8 +20,6 @@ public:
 
 	void do_post(float delta) override;
 
-	void to_post() override;
-
 	void handle_quit() override;
 
 private:

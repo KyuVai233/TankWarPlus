@@ -5,7 +5,7 @@ int GameManager::run(int argc, char** argv)
 	if (ConfigGameManager::instance()->get_player()->get_identity() 
 		== Player::Identity::Owner)
 	{
-		std::thread thread_on_server(&GameManager::on_server, this);
+		std::thread thread_on_server(&GameManager::on_server, this, delta);
 
 		//join
 	}
@@ -21,13 +21,10 @@ int GameManager::run(int argc, char** argv)
 		}
 
 		Uint64 current_counter = SDL_GetPerformanceCounter();
-		float delta = (float)(current_counter - last_counter) / counter_freq;
+		delta = (float)(current_counter - last_counter) / counter_freq;
 		last_counter = current_counter;
 		if (delta * 1000 < 1000.0 / 60)
 			SDL_Delay((Uint32)(1000.0 / 60 - delta * 1000));
-
-		if(ConfigGameManager::instance()->get_player()->get_identity() != Player::Identity::None)
-			to_post();
 
 		on_update(delta);
 
@@ -42,9 +39,9 @@ int GameManager::run(int argc, char** argv)
 	return 0;
 }
 
-void GameManager::on_server()
+void GameManager::on_server(float delta)
 {
-	do_post();
+	do_post(delta);
 
 	ConfigGameManager::instance()->server.listen(ConfigHomeManager::instance()->get_ip(),
 		ConfigHomeManager::instance()->get_port());
@@ -68,14 +65,9 @@ void GameManager::on_render(SDL_Renderer* renderer)
 	ScreenManager::instance()->on_render(renderer);
 }
 
-void GameManager::to_post()
+void GameManager::do_post(float delta)
 {
-	ScreenManager::instance()->to_post();
-}
-
-void GameManager::do_post()
-{
-	ScreenManager::instance()->to_post();
+	ScreenManager::instance()->do_post(delta);
 }
 
 

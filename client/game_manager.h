@@ -19,7 +19,7 @@ class GameManager : public Manager<GameManager>
 public:
 	int run(int argc, char** argv);
 
-	void on_server();
+	void on_server(float delta);
 
 	void on_input(const SDL_Event& event);
 
@@ -27,9 +27,7 @@ public:
 
 	void on_render(SDL_Renderer* renderer);
 
-	void to_post();
-
-	void do_post();
+	void do_post(float delta);
 
 protected:
 	GameManager();
@@ -41,6 +39,8 @@ private:
 
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
+
+	float delta = 0;
 
 private:
 	//初始化标识

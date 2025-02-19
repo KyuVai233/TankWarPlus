@@ -56,11 +56,6 @@ void Screen::on_render(SDL_Renderer* renderer)
 		button->on_render(renderer);
 }
 
-void Screen::to_post()
-{
-
-}
-
 void Screen::do_post(float delta)
 {
 

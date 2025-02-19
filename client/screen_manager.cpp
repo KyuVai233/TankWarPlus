@@ -39,11 +39,6 @@ void ScreenManager::on_render(SDL_Renderer* renderer)
 	current_screen->on_render(renderer);
 }
 
-void ScreenManager::to_post()
-{
-	current_screen->to_post();
-}
-
 void ScreenManager::do_post(float delta)
 {
 	current_screen->do_post(delta);

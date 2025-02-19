@@ -23,7 +23,6 @@ public:
 	void on_input(const SDL_Event& event);
 	void on_update(float delta);
 	void on_render(SDL_Renderer* renderer);
-	void to_post();
 	void do_post(float delta);
 	void handle_quit();
 

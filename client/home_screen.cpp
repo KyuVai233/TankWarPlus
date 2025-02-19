@@ -109,11 +109,6 @@ void HomeScreen::do_post(float delta)
 		});
 }
 
-void HomeScreen::to_post()
-{
-
-}
-
 void HomeScreen::handle_quit()
 {
 	ConfigHomeManager* instance = ConfigHomeManager::instance();

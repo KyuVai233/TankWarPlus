@@ -24,7 +24,7 @@ public:
 
 	void on_render(SDL_Renderer* renderer) override;
 
-	void to_post() override;
+	void connect();
 
 private:
 	bool is_try_build = false;		//是否尝试创建房间

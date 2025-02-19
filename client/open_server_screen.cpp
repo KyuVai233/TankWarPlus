@@ -25,10 +25,18 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 			if (is_write_port)
 				str_port.pop_back();
 		}
+		else if (event.key.keysym.scancode == SDLK_RETURN)
+		{
+			if (is_write_ip)
+				is_write_ip = false;
+			if (is_write_port)
+				is_write_port = false;
+		}
 		break;
 	case SDL_TEXTINPUT:
+	{
 		const char* word = event.text.text;
-		for(int i = 0; word[i] != '\0'; i++)
+		for (int i = 0; word[i] != '\0'; i++)
 		{
 			if (is_write_ip)
 				if (isalnum(word[i]) || word[i] == '.')
@@ -38,6 +46,7 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 						str_port += word[i];
 		}
 		break;
+	}
 	default:
 		break;
 	}
@@ -73,7 +82,7 @@ void OpenServerScreen::on_render(SDL_Renderer* renderer)
 	Screen::on_render(renderer);
 }
 
-void OpenServerScreen::to_post()
+void OpenServerScreen::connect()
 {
 	ConfigGameManager* instance = ConfigGameManager::instance();
 	const std::string str_address = ConfigHomeManager::instance()->get_address();
