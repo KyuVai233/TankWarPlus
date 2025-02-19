@@ -82,6 +82,9 @@
     <Filter Include="头文件\init\effect">
       <UniqueIdentifier>{3d6afacb-6f53-4fc4-aa11-8e00f6f6bf55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\init\button">
+      <UniqueIdentifier>{4babadc1-a6bf-46c6-b229-5f0fd9b34df1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="time_timer.h">
@@ -128,9 +131,6 @@
     </ClInclude>
     <ClInclude Include="image.h">
       <Filter>头文件\init\render</Filter>
-    </ClInclude>
-    <ClInclude Include="button.h">
-      <Filter>头文件\screen</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>头文件\init\render</Filter>
@@ -186,6 +186,9 @@
     <ClInclude Include="effect.h">
       <Filter>头文件\init\effect</Filter>
     </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>头文件\init\button</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\thirdparty\cJSON\cJSON.c">
@@ -212,9 +215,6 @@
     <ClCompile Include="resources_manager.cpp">
       <Filter>头文件\manager</Filter>
     </ClCompile>
-    <ClCompile Include="button.cpp">
-      <Filter>头文件\screen</Filter>
-    </ClCompile>
     <ClCompile Include="camera.cpp">
       <Filter>头文件\init\render</Filter>
     </ClCompile>
@@ -232,6 +232,9 @@
     </ClCompile>
     <ClCompile Include="wave.cpp">
       <Filter>头文件\init\wave</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>头文件\init\button</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

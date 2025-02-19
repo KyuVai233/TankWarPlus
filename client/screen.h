@@ -11,8 +11,9 @@ class Screen
 {
 public:
 	Screen() = delete;
-	Screen(SDL_Texture* tex_background, const std::string& screen_type)
-		:tex_background(tex_background), screen_type(screen_type), next_screen("none") { };
+	Screen(SDL_Texture* tex_background, const std::string& screen_type, Mix_Chunk* background_bgm)
+		:tex_background(tex_background), screen_type(screen_type), 
+		next_screen("none"), background_bgm(background_bgm) { };
 	~Screen() = default;
 
 	void set_next_screen(const std::string& next_screen)
@@ -25,6 +26,11 @@ public:
 		return next_screen;
 	}
 
+	Mix_Chunk* get_background_bgm() const
+	{
+		return background_bgm;
+	}
+
 	virtual void on_input(const SDL_Event& event);
 	virtual void on_update(float delta);
 	virtual void on_render(SDL_Renderer* renderer);
@@ -35,6 +41,7 @@ public:
 protected:
 	std::string screen_type;
 	std::string next_screen;
+	Mix_Chunk* background_bgm;
 
 	std::vector<Button*> button_list;				//°´Å¥ÁÐ±í
 	SDL_Texture* tex_background = nullptr;			//±³¾°Í¼

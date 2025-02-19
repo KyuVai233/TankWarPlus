@@ -5,6 +5,7 @@ void ScreenManager::on_entry(const std::string& screen_id)
 	if (!screen_pool[screen_id])
 		return;
 	current_screen = screen_pool[screen_id];
+	Mix_PlayChannel(-1, current_screen->get_background_bgm(), -1);
 }
 
 void ScreenManager::add_screen(const std::string& screen_id, Screen* screen)
@@ -17,8 +18,11 @@ void ScreenManager::switch_screen()
 	if (current_screen->get_next_screen() == "none")
 		return;
 	const std::string str = current_screen->get_next_screen();
+	if (current_screen->get_background_bgm() != screen_pool[str]->get_background_bgm())
+		Mix_HaltChannel(-1);
 	current_screen->set_next_screen("none");
 	current_screen = screen_pool[str];
+	Mix_PlayChannel(-1, current_screen->get_background_bgm(), -1);
 }
 
 void ScreenManager::on_input(const SDL_Event& event)

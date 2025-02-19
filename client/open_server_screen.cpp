@@ -11,9 +11,9 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 			if (button->check_in_button(pos_cursor.x, pos_cursor.y))
 			{
 				if (event.button.button == SDL_BUTTON_LEFT)
-					button->set_is_click_left(true);
+					button->set_button_status(Button::ButtonStatus::ClickedLeft);
 				else if (event.button.button == SDL_BUTTON_RIGHT)
-					button->set_is_click_right(true);
+					button->set_button_status(Button::ButtonStatus::ClickedRight);
 			}
 		}
 		break;
@@ -47,6 +47,19 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 		}
 		break;
 	}
+	case SDL_MOUSEMOTION:
+		for (Button* button : button_list)
+		{
+			if (button->check_in_button(pos_cursor.x, pos_cursor.y)
+				&& button->get_button_status() == Button::ButtonStatus::Idle)
+			{
+				button->set_button_status(Button::ButtonStatus::Covered);
+				Mix_PlayChannel(-1, button->get_music_covered(), 0);
+			}
+			else
+				button->set_button_status(Button::ButtonStatus::Idle);
+		}
+		break;
 	default:
 		break;
 	}

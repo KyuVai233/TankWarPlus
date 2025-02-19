@@ -9,8 +9,8 @@
 class HomeScreen : public Screen
 {
 public:
-	HomeScreen(SDL_Texture* tex_background, const std::string& screen_type)
-		:Screen(tex_background, screen_type)
+	HomeScreen(SDL_Texture* tex_background, const std::string& screen_type, Mix_Chunk* background_bgm)
+		:Screen(tex_background, screen_type, background_bgm)
 	{
 	}
 

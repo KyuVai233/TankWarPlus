@@ -9,7 +9,7 @@ class MainScreen : public Screen
 {
 public:
 	MainScreen() = delete;
-	MainScreen(SDL_Texture* tex_background, const std::string& screen_type);
+	MainScreen(SDL_Texture* tex_background, const std::string& screen_type, Mix_Chunk* background_bgm);
 	~MainScreen() = default;
 
 	void on_input(const SDL_Event& event) override;

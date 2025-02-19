@@ -88,11 +88,15 @@ GameManager::GameManager()
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
 	init_assert(renderer, u8"renderer ³õÊ¼»¯Ê§°Ü");
 
-	ResourcesManager::instance()->load(renderer);
+	ResourcesManager* res_instance = ResourcesManager::instance();
+	res_instance->load(renderer);
 
-	ScreenManager::instance()->add_screen("main_screen", new MainScreen(ResourcesManager::instance()->find_texture("main_background"), "main_screen"));
-	ScreenManager::instance()->add_screen("open_server_screen", new OpenServerScreen(ResourcesManager::instance()->find_texture("open_server_background"), "open_server_screen"));
-	ScreenManager::instance()->on_entry("main_screen");
+	ScreenManager* scr_instance = ScreenManager::instance();
+	scr_instance->add_screen("main_screen",
+		new MainScreen(res_instance->find_texture("main_background"), "main_screen", res_instance->find_audio("main_bgm")));
+	scr_instance->add_screen("open_server_screen",
+		new OpenServerScreen(res_instance->find_texture("open_server_background"), "open_server_screen", nullptr));
+	scr_instance->on_entry("main_screen");
 }
 
 GameManager::~GameManager()
