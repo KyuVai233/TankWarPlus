@@ -19,10 +19,12 @@ void ScreenManager::switch_screen()
 		return;
 	const std::string str = current_screen->get_next_screen();
 	if (current_screen->get_background_bgm() != screen_pool[str]->get_background_bgm())
+	{
 		Mix_HaltChannel(-1);
+		Mix_PlayChannel(-1, screen_pool[str]->get_background_bgm(), -1);
+	}
 	current_screen->set_next_screen("none");
 	current_screen = screen_pool[str];
-	Mix_PlayChannel(-1, current_screen->get_background_bgm(), -1);
 }
 
 void ScreenManager::on_input(const SDL_Event& event)
