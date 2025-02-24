@@ -1,15 +1,23 @@
 #include "main_screen.h"
 
-MainScreen::MainScreen(SDL_Texture* tex_background, const std::string& screen_type, Mix_Chunk* background_bgm)
-	:Screen(tex_background, screen_type, background_bgm)
+MainScreen::MainScreen(const std::string& screen_type, Mix_Chunk* background_bgm)
+	:Screen(screen_type, background_bgm)
 {
 	ResourcesManager* instance = ResourcesManager::instance();
 
-	const float mul = 3.5f;
-	SDL_Rect rect_src = { 0,0,128,64 };
-	SDL_Rect rect_dst = { 416,0,128 * mul,64 * mul };
-	logo = new Image(instance->find_texture("logo"),
-		rect_src, rect_dst);
+	{
+		SDL_Rect rect_src = { 0,0,1280,900 };
+		SDL_Rect rect_dst = { 0,0,1280,960 };
+		Image* main_background = new Image(instance->find_texture("main_background"), rect_src, rect_dst);
+		image_list.emplace_back(main_background);
+	}
+	{
+		const float mul = 3.5f;
+		SDL_Rect rect_src = { 0,0,128,64 };
+		SDL_Rect rect_dst = { 416,0,128 * mul,64 * mul };
+		Image* logo = new Image(instance->find_texture("logo"), rect_src, rect_dst);
+		image_list.emplace_back(logo);
+	}
 
 	{
 		SDL_Texture* tex_button_fight_idle = instance->find_texture("button_fight_idle");
@@ -73,6 +81,4 @@ void MainScreen::on_update(float delta)
 void MainScreen::on_render(SDL_Renderer* renderer)
 {
 	Screen::on_render(renderer);
-
-	logo->draw_image(renderer);
 }

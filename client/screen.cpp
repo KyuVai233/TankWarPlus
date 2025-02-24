@@ -46,19 +46,14 @@ void Screen::on_update(float delta)
 
 void Screen::on_render(SDL_Renderer* renderer)
 {
-	if (!tex_background)	return;
-	int width, height;
-	SDL_QueryTexture(tex_background, nullptr, nullptr, &width, &height);
-	SDL_Rect rect =
-	{
-		0, 0,
-		width, height
-	};
-
-	draw(renderer, tex_background, &rect, &rect);
+	for (Image* img : image_list)
+		img->draw_image(renderer);
 
 	for (Button* button : button_list)
-		button->on_render(renderer);
+	{
+		button->on_render(renderer); 
+		draw_help(renderer, button->get_rect_usable());
+	}
 }
 
 void Screen::do_post(float delta)

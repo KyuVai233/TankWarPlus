@@ -28,21 +28,27 @@ public:
 	void set_position_src(const Vector2& position)
 	{
 		this->position_src = position;
+		position_dst = position;
+		position_usable = position;
 	}
 
 	void set_size_src(const Vector2& size)
 	{
 		this->size_src = size;
+		size_dst = size;
+		size_usable = size;
 	}
 
 	void set_position_dst(const Vector2& position)
 	{
 		this->position_dst = position;
+		position_usable = position;
 	}
 
 	void set_size_dst(const Vector2& size)
 	{
 		this->size_dst = size;
+		size_usable = size;
 	}
 
 	const Vector2& get_initial_size()
@@ -50,6 +56,28 @@ public:
 		int width, height;
 		SDL_QueryTexture(texture_idle, nullptr, nullptr, &width, &height);
 		return { (float)width,(float)height };
+	}
+
+	void set_position_usable(const Vector2& vec)
+	{
+		position_usable = vec;
+	}
+
+	void set_size_usable(const Vector2& vec)
+	{
+		size_usable = vec;
+	}
+
+	SDL_Rect* get_rect_usable() const
+	{
+		SDL_Rect rect =
+		{
+			(float)position_usable.x,
+			(float)position_usable.y,
+			(float)size_usable.x,
+			(float)size_usable.y
+		};
+		return &rect;
 	}
 
 	void set_is_visible(bool flag)
@@ -64,6 +92,9 @@ public:
 
 	void set_button_status(ButtonStatus status)
 	{
+		if ((status == ButtonStatus::ClickedLeft && on_left_clicked) 
+			|| (status == ButtonStatus::ClickedRight && on_right_clicked))
+			return;
 		this->status = status;
 	}
 
@@ -115,8 +146,8 @@ public:
 	//检测位置是否在按钮内
 	bool check_in_button(float x, float y) const
 	{
-		return (x >= position_dst.x && x <= position_dst.x + size_dst.x) &&
-			(y >= position_dst.y && y <= position_dst.y + size_dst.y);
+		return (x >= position_usable.x && x <= position_usable.x + size_usable.x) &&
+			(y >= position_usable.y && y <= position_usable.y + size_usable.y);
 	}
 
 	void on_update(float delta);
@@ -128,6 +159,8 @@ private:
 	Vector2 size_src;							//截取大小
 	Vector2 position_dst = { 0,0 };				//目标位置
 	Vector2 size_dst = size_src;				//目标大小
+	Vector2 position_usable = { 0,0 };			//作用位置
+	Vector2 size_usable = size_dst;				//作用大小
 	bool is_visible = true;						//是否可见
 	bool is_usable = true;						//是否可用
 	SDL_Texture* texture_idle = nullptr;		//按钮闲置纹理

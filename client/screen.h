@@ -1,6 +1,7 @@
 #pragma once
 
 #include "button.h"
+#include "image.h"
 
 #include "../thirdparty/httplib.h"
 
@@ -11,8 +12,8 @@ class Screen
 {
 public:
 	Screen() = delete;
-	Screen(SDL_Texture* tex_background, const std::string& screen_type, Mix_Chunk* background_bgm)
-		:tex_background(tex_background), screen_type(screen_type), 
+	Screen(const std::string& screen_type, Mix_Chunk* background_bgm)
+		:screen_type(screen_type), 
 		next_screen("none"), background_bgm(background_bgm) { };
 	~Screen() = default;
 
@@ -44,5 +45,5 @@ protected:
 	Mix_Chunk* background_bgm;
 
 	std::vector<Button*> button_list;				//按钮列表
-	SDL_Texture* tex_background = nullptr;			//背景图
+	std::vector<Image*> image_list;					//图片列表
 };

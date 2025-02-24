@@ -205,7 +205,7 @@ public:
 		status_machine.switch_status(id);
 	}
 
-	void add_effect(Effect* effect)
+	void add_effect(EffectInvincibility* effect)
 	{
 		effect_list.emplace_back(effect);
 	}
@@ -252,7 +252,7 @@ protected:
 	TankType tank_type = TankType::Little;			//tank类型
 	StatusMachine status_machine;					//状态机
 
-	std::vector<Effect*> effect_list;				//效果表
+	std::vector<EffectInvincibility*> effect_list;				//效果表
 
 	AnimationGroup* current_animation = nullptr;	//当前动画
 	std::unordered_map<std::string, AnimationGroup> animaton_pool;

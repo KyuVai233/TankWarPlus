@@ -1,5 +1,106 @@
 #include "open_server_screen.h"
 
+OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* background_bgm)
+	:Screen(screen_type, background_bgm)
+{
+	ResourcesManager* instance = ResourcesManager::instance();
+
+	{
+		SDL_Rect rect_src = { 0,0,1280,900 };
+		SDL_Rect rect_dst = { 0,0,1280,960 };
+		Image* open_server_background = new Image(instance->find_texture("open_server_background"), rect_src, rect_dst);
+		image_list.emplace_back(open_server_background);
+	}
+	{
+		Image* img_background_plus = new Image(instance->find_texture("open_server_background_plus"),
+			{ 0,0,128,128 }, { 384,204,512,512 });
+		image_list.emplace_back(img_background_plus);
+	}
+	{
+		Image* img_ip_word = new Image(instance->find_texture("ip_word"),
+			{ 0,0,128,128 }, { 384,204,512,512 });
+		image_list.emplace_back(img_ip_word);
+	}
+	{
+		Image* img_port_word = new Image(instance->find_texture("port_word"),
+			{ 0,0,128,128 }, { 384,204,512,512 });
+		image_list.emplace_back(img_port_word);
+	}
+
+	{
+		SDL_Texture* button_ip_idle = instance->find_texture("button_ip_idle");
+		SDL_Texture* button_ip_clicked = instance->find_texture("button_ip_clicked");
+		button_ip = new Button(button_ip_idle, button_ip_idle, button_ip_clicked);
+		button_ip->set_size_src({ 128,128 });
+		button_ip->set_position_dst({ 384,204 });
+		button_ip->set_size_dst({ 512,512 });
+		button_ip->set_position_usable({ 43 * 4 + 384,17 * 4 + 204 });
+		button_ip->set_size_usable({ 72 * 4,15 * 4 });
+		button_ip->set_music_covered(instance->find_audio("click_button"));
+		button_ip->set_on_left_clicked([&]()
+			{
+				if (is_write_ip)	return;
+				is_write_ip = true;
+				is_write_port = false;
+			});
+		button_list.emplace_back(button_ip);
+	}
+	{
+		SDL_Texture* button_port_idle = instance->find_texture("button_port_idle");
+		SDL_Texture* button_port_clicked = instance->find_texture("button_port_clicked");
+		button_port = new Button(button_port_idle, button_port_idle, button_port_clicked);
+		button_port->set_size_src({ 128,128 });
+		button_port->set_position_dst({ 384,204 });
+		button_port->set_size_dst({ 512,512 });
+		button_port->set_position_usable({ 43 * 4 + 384,37 * 4 + 204 });
+		button_port->set_size_usable({ 72 * 4,15 * 4 });
+		button_port->set_music_covered(instance->find_audio("click_button"));
+		button_port->set_on_left_clicked([&]()
+			{
+				if (is_write_port)	return;
+				is_write_ip = false;
+				is_write_port = true;
+			});
+		button_list.emplace_back(button_port);
+	}
+	{
+		SDL_Texture* button_connect_home_idle = instance->find_texture("button_connect_home_idle");
+		SDL_Texture* button_connect_home_covered = instance->find_texture("button_connect_home_covered");
+		Button* button_connect_home = new Button(button_connect_home_idle, button_connect_home_covered, button_connect_home_idle);
+		button_connect_home->set_size_src(button_connect_home->get_initial_size());
+		button_connect_home->set_position_dst({ 430,519 });
+		button_connect_home->set_size_dst(button_connect_home->get_initial_size());
+		button_connect_home->set_position_usable({ 430 + 3,519 + 15 });
+		button_connect_home->set_size_usable({ 58,28 });
+		button_connect_home->set_music_covered(instance->find_audio("click_button"));
+		button_list.emplace_back(button_connect_home);
+	}
+	{
+		SDL_Texture* button_create_home_idle = instance->find_texture("button_create_home_idle");
+		SDL_Texture* button_create_home_covered = instance->find_texture("button_create_home_covered");
+		Button* button_create_home = new Button(button_create_home_idle, button_create_home_covered, button_create_home_idle);
+		button_create_home->set_size_src(button_create_home->get_initial_size());
+		button_create_home->set_position_dst({ 545,519 });
+		button_create_home->set_size_dst(button_create_home->get_initial_size());
+		button_create_home->set_position_usable({ 545 + 3,519 + 15 });
+		button_create_home->set_size_usable({ 58,28 });
+		button_create_home->set_music_covered(instance->find_audio("click_button"));
+		button_list.emplace_back(button_create_home);
+	}
+	{
+		SDL_Texture* button_quit_open_server_idle = instance->find_texture("button_quit_open_server_idle");
+		SDL_Texture* button_quit_open_server_covered = instance->find_texture("button_quit_open_server_covered");
+		Button* button_quit_open_server = new Button(button_quit_open_server_idle, button_quit_open_server_covered, button_quit_open_server_idle);
+		button_quit_open_server->set_size_src(button_quit_open_server->get_initial_size());
+		button_quit_open_server->set_position_dst({ 660,519 });
+		button_quit_open_server->set_size_dst(button_quit_open_server->get_initial_size());
+		button_quit_open_server->set_position_usable({ 660 + 3,519 + 15 });
+		button_quit_open_server->set_size_usable({ 58,28 });
+		button_quit_open_server->set_music_covered(instance->find_audio("click_button"));
+		button_list.emplace_back(button_quit_open_server);
+	}
+}
+
 void OpenServerScreen::on_input(const SDL_Event& event)
 {
 	SDL_Point pos_cursor = { event.motion.x,event.motion.y };
@@ -25,10 +126,13 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 			if (is_write_port)
 				str_port.pop_back();
 		}
-		else if (event.key.keysym.scancode == SDLK_RETURN)
+		else if (event.key.keysym.scancode == SDL_SCANCODE_RETURN)
 		{
 			if (is_write_ip)
+			{
+				std::cout << "tes" << std::endl;
 				is_write_ip = false;
+			}
 			if (is_write_port)
 				is_write_port = false;
 		}
@@ -56,7 +160,8 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 				button->set_button_status(Button::ButtonStatus::Covered);
 				Mix_PlayChannel(-1, button->get_music_covered(), 0);
 			}
-			else
+			else if (!button->check_in_button(pos_cursor.x, pos_cursor.y)
+				&& button->get_button_status() == Button::ButtonStatus::Covered)
 				button->set_button_status(Button::ButtonStatus::Idle);
 		}
 		break;
@@ -68,6 +173,17 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 void OpenServerScreen::on_update(float delta)
 {
 	Screen::on_update(delta);
+	//std::cout << "now:" << is_write_ip << ";" << is_write_port << "." << std::endl;
+	if (!is_write_ip && button_ip->get_button_status() == Button::ButtonStatus::ClickedLeft)
+	{
+		std::cout << "ip" << std::endl;
+		button_ip->set_button_status(Button::ButtonStatus::Idle);
+	}
+	if (!is_write_port && button_port->get_button_status() == Button::ButtonStatus::ClickedLeft)
+	{
+		std::cout << "port" << std::endl;
+		button_port->set_button_status(Button::ButtonStatus::Idle);
+	}
 
 	//∆•≈‰ip
 	if (!is_write_ip && !str_ip.empty())

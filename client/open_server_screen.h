@@ -1,7 +1,9 @@
 #pragma once
 
+#include "image.h"
 #include "screen.h"
 #include "config_home_manager.h"
+#include "resources_manager.h"
 
 #include <SDL.h>
 
@@ -11,10 +13,7 @@
 class OpenServerScreen : public Screen
 {
 public:
-	OpenServerScreen(SDL_Texture* tex_background, const std::string& screen_type, Mix_Chunk* background_bgm)
-		:Screen(tex_background, screen_type, background_bgm)
-	{
-	}
+	OpenServerScreen(const std::string& screen_type, Mix_Chunk* background_bgm);
 
 	~OpenServerScreen() = default;
 
@@ -35,4 +34,7 @@ private:
 
 	bool is_write_ip = false;		//是否开始输入ip
 	bool is_write_port = false;		//是否开始输入端口
+
+	Button* button_ip = nullptr;
+	Button* button_port = nullptr;
 };

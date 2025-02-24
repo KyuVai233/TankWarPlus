@@ -25,3 +25,9 @@ inline void draw(SDL_Renderer* renderer, Camera* camera, SDL_Texture* texture,
 	rect_dst_new.h = rect_dst->h;
 	SDL_RenderCopyEx(renderer, texture, rect_src, &rect_dst_new, angle, nullptr, SDL_FLIP_NONE);
 }
+
+inline void draw_help(SDL_Renderer* renderer, SDL_Rect* rect)
+{
+	SDL_SetRenderDrawColor(renderer, 50, 0, 0, 255);
+	SDL_RenderDrawRect(renderer, rect);
+}

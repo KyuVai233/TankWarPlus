@@ -1,13 +1,12 @@
 #pragma once
 
-
 #include "wave_timer.h"
 
-class Effect
+class EffectInvincibility
 {
 public:
-	Effect() = default;
-	~Effect() = default;
+	EffectInvincibility() = default;
+	~EffectInvincibility() = default;
 
 	void set_time(int wave)
 	{

@@ -92,10 +92,8 @@ GameManager::GameManager()
 	res_instance->load(renderer);
 
 	ScreenManager* scr_instance = ScreenManager::instance();
-	scr_instance->add_screen("main_screen",
-		new MainScreen(res_instance->find_texture("main_background"), "main_screen", res_instance->find_audio("main_bgm")));
-	scr_instance->add_screen("open_server_screen",
-		new OpenServerScreen(res_instance->find_texture("open_server_background"), "open_server_screen", res_instance->find_audio("main_bgm")));
+	scr_instance->add_screen("main_screen",new MainScreen("main_screen", res_instance->find_audio("main_bgm")));
+	scr_instance->add_screen("open_server_screen",new OpenServerScreen("open_server_screen", res_instance->find_audio("main_bgm")));
 	scr_instance->on_entry("main_screen");
 }
 
