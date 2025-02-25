@@ -23,7 +23,7 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 	}
 	{
 		Image* img_port_word = new Image(instance->find_texture("port_word"),
-			{ 0,0,128,128 }, { 384,204,512,512 });
+			{ 0,0,128,128 }, { 384,224,512,512 });
 		image_list.emplace_back(img_port_word);
 	}
 
@@ -48,9 +48,9 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 		SDL_Texture* button_port_clicked = instance->find_texture("button_port_clicked");
 		button_port = new Button(button_port_idle, button_port_idle, button_port_clicked);
 		button_port->set_size_src({ 128,128 });
-		button_port->set_position_dst({ 384,204 });
+		button_port->set_position_dst({ 384,224 });
 		button_port->set_size_dst({ 512,512 });
-		button_port->set_position_usable({ 43 * 4 + 384,37 * 4 + 204 });
+		button_port->set_position_usable({ 43 * 4 + 384,37 * 4 + 224 });
 		button_port->set_size_usable({ 72 * 4,15 * 4 });
 		button_port->set_music_covered(instance->find_audio("click_button"));
 		button_port->set_on_left_clicked([&]()
@@ -64,9 +64,9 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 		SDL_Texture* button_connect_home_covered = instance->find_texture("button_connect_home_covered");
 		Button* button_connect_home = new Button(button_connect_home_idle, button_connect_home_covered, button_connect_home_idle);
 		button_connect_home->set_size_src(button_connect_home->get_initial_size());
-		button_connect_home->set_position_dst({ 430,519 });
+		button_connect_home->set_position_dst({ 490,519 });
 		button_connect_home->set_size_dst(button_connect_home->get_initial_size());
-		button_connect_home->set_position_usable({ 430 + 3,519 + 15 });
+		button_connect_home->set_position_usable({ 490 + 3,519 + 15 });
 		button_connect_home->set_size_usable({ 58,28 });
 		button_connect_home->set_music_covered(instance->find_audio("click_button"));
 		button_list.emplace_back(button_connect_home);
@@ -76,9 +76,9 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 		SDL_Texture* button_create_home_covered = instance->find_texture("button_create_home_covered");
 		Button* button_create_home = new Button(button_create_home_idle, button_create_home_covered, button_create_home_idle);
 		button_create_home->set_size_src(button_create_home->get_initial_size());
-		button_create_home->set_position_dst({ 545,519 });
+		button_create_home->set_position_dst({ 615,519 });
 		button_create_home->set_size_dst(button_create_home->get_initial_size());
-		button_create_home->set_position_usable({ 545 + 3,519 + 15 });
+		button_create_home->set_position_usable({ 615 + 3,519 + 15 });
 		button_create_home->set_size_usable({ 58,28 });
 		button_create_home->set_music_covered(instance->find_audio("click_button"));
 		button_list.emplace_back(button_create_home);
@@ -88,11 +88,17 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 		SDL_Texture* button_quit_open_server_covered = instance->find_texture("button_quit_open_server_covered");
 		Button* button_quit_open_server = new Button(button_quit_open_server_idle, button_quit_open_server_covered, button_quit_open_server_idle);
 		button_quit_open_server->set_size_src(button_quit_open_server->get_initial_size());
-		button_quit_open_server->set_position_dst({ 660,519 });
+		button_quit_open_server->set_position_dst({ 740,519 });
 		button_quit_open_server->set_size_dst(button_quit_open_server->get_initial_size());
-		button_quit_open_server->set_position_usable({ 660 + 3,519 + 15 });
+		button_quit_open_server->set_position_usable({ 740 + 3,519 + 15 });
 		button_quit_open_server->set_size_usable({ 58,28 });
 		button_quit_open_server->set_music_covered(instance->find_audio("click_button"));
+		button_quit_open_server->set_on_left_clicked([&]()
+			{
+				str_ip.clear();
+				str_port.clear();
+				set_next_screen("main_screen");
+			});
 		button_list.emplace_back(button_quit_open_server);
 	}
 }
@@ -100,6 +106,7 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 void OpenServerScreen::on_input(const SDL_Event& event)
 {
 	SDL_Point pos_cursor = { event.motion.x,event.motion.y };
+	SDL_Keymod modState = SDL_GetModState();
 	switch (event.type)
 	{
 	case SDL_MOUSEBUTTONUP:
@@ -121,7 +128,7 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 		}
 		if (!button_port->check_in_button(pos_cursor.x, pos_cursor.y))
 		{
-			is_write_port = false; 
+			is_write_port = false;
 			button_port->set_button_status(Button::ButtonStatus::Idle);
 		}
 		
@@ -130,17 +137,54 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 	case SDL_KEYDOWN:
 		if (event.key.keysym.scancode == SDL_SCANCODE_BACKSPACE)
 		{
-			if (is_write_ip)
+			if (is_write_ip && !str_ip.empty())
 				str_ip.pop_back();
-			if (is_write_port)
+			if (is_write_port && !str_port.empty())
 				str_port.pop_back();
 		}
 		else if (event.key.keysym.scancode == SDL_SCANCODE_RETURN)
 		{
 			if (is_write_ip)
+			{
 				is_write_ip = false;
+				if (button_ip->check_in_button(pos_cursor.x, pos_cursor.y))
+					button_ip->set_button_status(Button::ButtonStatus::Covered);
+				else
+					button_ip->set_button_status(Button::ButtonStatus::Idle);
+			}
 			if (is_write_port)
+			{
 				is_write_port = false;
+				if (button_port->check_in_button(pos_cursor.x, pos_cursor.y))
+					button_port->set_button_status(Button::ButtonStatus::Covered);
+				else
+					button_port->set_button_status(Button::ButtonStatus::Idle);
+			}
+		}
+		else if (event.key.keysym.scancode == SDL_SCANCODE_C && (modState & KMOD_CTRL))
+		{
+			if (is_write_ip && !str_ip.empty())
+				SDL_SetClipboardText(str_ip.c_str());
+			else if(is_write_port && !str_port.c_str())
+				SDL_SetClipboardText(str_port.c_str());
+		}
+		else if (event.key.keysym.scancode == SDL_SCANCODE_V && (modState & KMOD_CTRL))
+		{
+			char* text_ctrl_v = SDL_GetClipboardText();
+			if (text_ctrl_v)
+			{
+				std::cout << text_ctrl_v << std::endl;
+				if (is_write_ip)
+				{
+					str_ip.clear();
+					str_ip = text_ctrl_v;
+				}
+				else if (is_write_port)
+				{
+					str_port.clear();
+					str_port = text_ctrl_v;
+				}
+			}
 		}
 		break;
 	case SDL_TEXTINPUT:
@@ -151,7 +195,7 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 			if (is_write_ip)
 				if (isalnum(word[i]) || word[i] == '.')
 					str_ip += word[i];
-				else if (is_write_port)
+				if (is_write_port)
 					if (word[i] >= '0' && word[i] <= '9')
 						str_port += word[i];
 		}
@@ -182,7 +226,7 @@ void OpenServerScreen::on_update(float delta)
 	//Æ¥Åäip
 	if (!is_write_ip && !str_ip.empty())
 	{
-		std::regex pattern_ip("^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$");
+		std::regex pattern_ip("^(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)){3}$");
 		if (std::regex_match(str_ip, pattern_ip))
 		{
 			ConfigHomeManager::instance()->set_ip(str_ip);
@@ -192,7 +236,7 @@ void OpenServerScreen::on_update(float delta)
 	//Æ¥Åä¶Ë¿Ú
 	if (!is_write_port && !str_port.empty())
 	{
-		std::regex pattern_port("^(0|[1-9]\d{0,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$");
+		std::regex pattern_port("^(0|[1-9]\\d{0,3}|[1-5]\\d{4}|6[0-4]\\d{3}|65[0-4]\\d{2}|655[0-2]\\d|6553[0-5])$");
 		if (std::regex_match(str_port, pattern_port))
 		{
 			ConfigHomeManager::instance()->set_port(std::atoi(str_port.c_str()));
@@ -203,6 +247,30 @@ void OpenServerScreen::on_update(float delta)
 void OpenServerScreen::on_render(SDL_Renderer* renderer)
 {
 	Screen::on_render(renderer);
+	SDL_Color textColor = { 0,0,0,255 };
+	Vector2 text_spacing = { 10,15 };			//ÎÄ×ÖÓëÎÄ×Ö¿ò¼ä¾à
+	if(!str_ip.empty())
+	{
+		SDL_Surface* sur_ip = TTF_RenderText_Solid(ResourcesManager::instance()->get_main_font(),
+			str_ip.c_str(), textColor);
+		SDL_Texture* tex_ip = SDL_CreateTextureFromSurface(renderer, sur_ip);
+		int w, h;
+		SDL_QueryTexture(tex_ip, NULL, NULL, &w, &h);
+		SDL_Rect rect_src = { 0,0,(float)w,(float)h };
+		SDL_Rect rect_dst = { 43 * 4 + 384 + text_spacing.x,17 * 4 + 204 + text_spacing.y,(float)w,(float)h };
+		draw(renderer, tex_ip, &rect_src, &rect_dst);
+	}
+	if(!str_port.empty())
+	{
+		SDL_Surface* sur_port = TTF_RenderText_Solid(ResourcesManager::instance()->get_main_font(),
+			str_port.c_str(), textColor);
+		SDL_Texture* tex_port = SDL_CreateTextureFromSurface(renderer, sur_port);
+		int w, h;
+		SDL_QueryTexture(tex_port, NULL, NULL, &w, &h);
+		SDL_Rect rect_src = { 0,0,(float)w,(float)h };
+		SDL_Rect rect_dst = { 43 * 4 + 384 + text_spacing.x,37 * 4 + 224 + text_spacing.y,(float)w,(float)h };
+		draw(renderer, tex_port, &rect_src, &rect_dst);
+	}
 }
 
 void OpenServerScreen::connect()

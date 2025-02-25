@@ -25,6 +25,7 @@ void ScreenManager::switch_screen()
 	}
 	current_screen->set_next_screen("none");
 	current_screen = screen_pool[str];
+	current_screen->entry_screen();
 }
 
 void ScreenManager::on_input(const SDL_Event& event)

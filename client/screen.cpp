@@ -66,3 +66,11 @@ void Screen::handle_quit()
 {
 
 }
+
+void Screen::entry_screen()
+{
+	for (Button* button : button_list)
+	{
+		button->set_button_status(Button::ButtonStatus::Idle);
+	}
+}

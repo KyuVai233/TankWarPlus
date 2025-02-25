@@ -32,6 +32,9 @@ public:
 		return background_bgm;
 	}
 
+	//进入界面设置
+	void entry_screen();
+
 	virtual void on_input(const SDL_Event& event);
 	virtual void on_update(float delta);
 	virtual void on_render(SDL_Renderer* renderer);

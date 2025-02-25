@@ -41,6 +41,8 @@ void ResourcesManager::load(SDL_Renderer* renderer)
 				Mix_Chunk* audio = Mix_LoadWAV(path.u8string().c_str());
 				audio_pool[path.stem().u8string()] = audio;
 			}
+
+			main_font = TTF_OpenFont("./resources/main_ttf.TTF", 30);
 		}
 	}
 }
