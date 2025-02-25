@@ -10,15 +10,9 @@ void Button::on_update(float delta)
 	case Button::ButtonStatus::Covered:
 		current_texture = texture_covered;
 		break;
-	case Button::ButtonStatus::ClickedLeft:
+	case Button::ButtonStatus::Clicked:
 		current_texture = texture_clicked;
 		Mix_PlayChannel(-1, music_clicked, 0);
-		take_on_left_clicked();
-		break;
-	case Button::ButtonStatus::ClickedRight:
-		current_texture = texture_clicked;
-		Mix_PlayChannel(-1, music_clicked, 0);
-		take_on_right_clicked();
 		break;
 	default:
 		break;

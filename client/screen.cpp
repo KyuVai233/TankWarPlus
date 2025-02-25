@@ -10,10 +10,11 @@ void Screen::on_input(const SDL_Event& event)
 		{
 			if (button->check_in_button(pos_cursor.x, pos_cursor.y))
 			{
+				button->set_button_status(Button::ButtonStatus::Clicked);
 				if (event.button.button == SDL_BUTTON_LEFT)
-					button->set_button_status(Button::ButtonStatus::ClickedLeft);
+					button->take_on_left_clicked();
 				else if (event.button.button == SDL_BUTTON_RIGHT)
-					button->set_button_status(Button::ButtonStatus::ClickedRight);
+					button->take_on_right_clicked();
 			}
 		}
 		break;

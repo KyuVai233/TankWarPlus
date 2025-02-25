@@ -44,10 +44,6 @@ MainScreen::MainScreen(const std::string& screen_type, Mix_Chunk* background_bgm
 		button_config->set_position_dst({ 60,450 });
 		button_config->set_size_dst({ 404,100 });
 		button_config->set_music_covered(instance->find_audio("click_button"));
-		button_config->set_on_left_clicked([&]()
-			{
-				set_next_screen("open_server_screen");
-			});
 		button_list.emplace_back(button_config);
 	}
 
@@ -60,10 +56,6 @@ MainScreen::MainScreen(const std::string& screen_type, Mix_Chunk* background_bgm
 		button_help->set_position_dst({ 60,650 });
 		button_help->set_size_dst({ 404,100 });
 		button_help->set_music_covered(instance->find_audio("click_button"));
-		button_help->set_on_left_clicked([&]()
-			{
-				set_next_screen("open_server_screen");
-			});
 		button_list.emplace_back(button_help);
 	}
 }

@@ -39,9 +39,7 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 		button_ip->set_music_covered(instance->find_audio("click_button"));
 		button_ip->set_on_left_clicked([&]()
 			{
-				if (is_write_ip)	return;
 				is_write_ip = true;
-				is_write_port = false;
 			});
 		button_list.emplace_back(button_ip);
 	}
@@ -57,8 +55,6 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 		button_port->set_music_covered(instance->find_audio("click_button"));
 		button_port->set_on_left_clicked([&]()
 			{
-				if (is_write_port)	return;
-				is_write_ip = false;
 				is_write_port = true;
 			});
 		button_list.emplace_back(button_port);
@@ -111,12 +107,25 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 		{
 			if (button->check_in_button(pos_cursor.x, pos_cursor.y))
 			{
+				button->set_button_status(Button::ButtonStatus::Clicked);
 				if (event.button.button == SDL_BUTTON_LEFT)
-					button->set_button_status(Button::ButtonStatus::ClickedLeft);
+					button->take_on_left_clicked();
 				else if (event.button.button == SDL_BUTTON_RIGHT)
-					button->set_button_status(Button::ButtonStatus::ClickedRight);
+					button->take_on_right_clicked();
 			}
 		}
+		if (!button_ip->check_in_button(pos_cursor.x, pos_cursor.y))
+		{
+			is_write_ip = false;
+			button_ip->set_button_status(Button::ButtonStatus::Idle);
+		}
+		if (!button_port->check_in_button(pos_cursor.x, pos_cursor.y))
+		{
+			is_write_port = false; 
+			button_port->set_button_status(Button::ButtonStatus::Idle);
+		}
+		
+
 		break;
 	case SDL_KEYDOWN:
 		if (event.key.keysym.scancode == SDL_SCANCODE_BACKSPACE)
@@ -129,10 +138,7 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 		else if (event.key.keysym.scancode == SDL_SCANCODE_RETURN)
 		{
 			if (is_write_ip)
-			{
-				std::cout << "tes" << std::endl;
 				is_write_ip = false;
-			}
 			if (is_write_port)
 				is_write_port = false;
 		}
@@ -173,18 +179,6 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 void OpenServerScreen::on_update(float delta)
 {
 	Screen::on_update(delta);
-	//std::cout << "now:" << is_write_ip << ";" << is_write_port << "." << std::endl;
-	if (!is_write_ip && button_ip->get_button_status() == Button::ButtonStatus::ClickedLeft)
-	{
-		std::cout << "ip" << std::endl;
-		button_ip->set_button_status(Button::ButtonStatus::Idle);
-	}
-	if (!is_write_port && button_port->get_button_status() == Button::ButtonStatus::ClickedLeft)
-	{
-		std::cout << "port" << std::endl;
-		button_port->set_button_status(Button::ButtonStatus::Idle);
-	}
-
 	//∆•≈‰ip
 	if (!is_write_ip && !str_ip.empty())
 	{

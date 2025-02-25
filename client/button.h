@@ -20,8 +20,7 @@ public:
 	{
 		Idle,
 		Covered,
-		ClickedLeft,
-		ClickedRight
+		Clicked,
 	};
 
 public:
@@ -92,8 +91,8 @@ public:
 
 	void set_button_status(ButtonStatus status)
 	{
-		if ((status == ButtonStatus::ClickedLeft && on_left_clicked) 
-			|| (status == ButtonStatus::ClickedRight && on_right_clicked))
+		if (status == ButtonStatus::Clicked &&
+			(!on_left_clicked && !on_right_clicked))
 			return;
 		this->status = status;
 	}
@@ -130,7 +129,12 @@ public:
 
 	void take_on_left_clicked()
 	{
-		if (on_left_clicked)	on_left_clicked();
+		if (!on_left_clicked)	
+		{
+			status = ButtonStatus::Covered;
+			return;
+		}
+		on_left_clicked();
 	}
 
 	void set_on_right_clicked(std::function<void()> on_right_clicked)
@@ -140,7 +144,12 @@ public:
 
 	void take_on_right_clicked()
 	{
-		if (on_right_clicked)	on_right_clicked();
+		if (!on_right_clicked)
+		{
+			status = ButtonStatus::Covered;
+			return;
+		}
+		on_right_clicked();
 	}
 
 	//检测位置是否在按钮内
