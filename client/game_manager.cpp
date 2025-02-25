@@ -51,6 +51,15 @@ void GameManager::on_server(float delta)
 
 void GameManager::on_input(const SDL_Event& event)
 {
+	switch (event.type)
+	{
+	case SDL_QUIT:
+		is_game_quit = true;
+		break;
+	default:
+		break;
+	}
+
 	ScreenManager::instance()->on_input(event);
 }
 

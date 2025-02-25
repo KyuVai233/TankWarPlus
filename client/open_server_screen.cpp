@@ -165,40 +165,32 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 		{
 			if (is_write_ip && !str_ip.empty())
 				SDL_SetClipboardText(str_ip.c_str());
-			else if(is_write_port && !str_port.c_str())
+			else if(is_write_port && !str_port.empty())
 				SDL_SetClipboardText(str_port.c_str());
 		}
 		else if (event.key.keysym.scancode == SDL_SCANCODE_V && (modState & KMOD_CTRL))
 		{
 			char* text_ctrl_v = SDL_GetClipboardText();
-			if (text_ctrl_v)
+			for (int i = 0; text_ctrl_v[i] != '\0'; i++)
 			{
-				std::cout << text_ctrl_v << std::endl;
 				if (is_write_ip)
-				{
-					str_ip.clear();
-					str_ip = text_ctrl_v;
-				}
-				else if (is_write_port)
-				{
-					str_port.clear();
-					str_port = text_ctrl_v;
-				}
+					if (isalnum(text_ctrl_v[i]) || text_ctrl_v[i] == '.')
+						str_ip += text_ctrl_v[i];
+				if (is_write_port)
+					if (text_ctrl_v[i] >= '0' && text_ctrl_v[i] <= '9')
+						str_port += text_ctrl_v[i];
 			}
 		}
 		break;
 	case SDL_TEXTINPUT:
 	{
 		const char* word = event.text.text;
-		for (int i = 0; word[i] != '\0'; i++)
-		{
 			if (is_write_ip)
-				if (isalnum(word[i]) || word[i] == '.')
-					str_ip += word[i];
+				if (isalnum(*word) || *word == '.')
+					str_ip += word;
 				if (is_write_port)
-					if (word[i] >= '0' && word[i] <= '9')
-						str_port += word[i];
-		}
+					if (*word >= '0' && *word <= '9')
+						str_port += word;
 		break;
 	}
 	case SDL_MOUSEMOTION:
