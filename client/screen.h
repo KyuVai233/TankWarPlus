@@ -2,11 +2,13 @@
 
 #include "button.h"
 #include "image.h"
+#include "second_screen.h"
 
 #include "../thirdparty/httplib.h"
 
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 class Screen
 {
@@ -33,7 +35,7 @@ public:
 	}
 
 	//进入界面设置
-	void entry_screen();
+	virtual void entry_screen();
 
 	virtual void on_input(const SDL_Event& event);
 	virtual void on_update(float delta);
@@ -47,6 +49,8 @@ protected:
 	std::string next_screen;
 	Mix_Chunk* background_bgm;
 
-	std::vector<Button*> button_list;				//按钮列表
-	std::vector<Image*> image_list;					//图片列表
+	std::vector<Button*> button_list;									//按钮列表
+	std::vector<Image*> image_list;										//图片列表
+	std::unordered_map<std::string, SecondScreen*> second_screen_pool;	//存在的副屏池
+	std::vector<SecondScreen*> second_screen_list;						//当前副屏列表
 };

@@ -23,6 +23,8 @@ public:
 
 	void on_render(SDL_Renderer* renderer) override;
 
+	void create_home();
+
 	void connect();
 
 private:

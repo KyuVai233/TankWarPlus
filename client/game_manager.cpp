@@ -2,19 +2,21 @@
 
 int GameManager::run(int argc, char** argv)
 {
-	if (ConfigGameManager::instance()->get_player()->get_identity() 
-		== Player::Identity::Owner)
-	{
-		std::thread thread_on_server(&GameManager::on_server, this, delta);
-
-		//join
-	}
-
 	Uint64 last_counter = SDL_GetPerformanceCounter();
 	const Uint64 counter_freq = SDL_GetPerformanceFrequency();
 
 	while (!is_game_quit)
 	{
+		ConfigGameManager* con_game_instance = ConfigGameManager::instance();
+		if (con_game_instance->get_player()->get_identity()
+			== Player::Identity::Owner && !con_game_instance->get_is_on_server())
+		{
+			con_game_instance->open_server();
+			std::thread thread_on_server(&GameManager::on_server, this, delta);
+
+			thread_on_server.detach();
+		}
+
 		while (SDL_PollEvent(&event))
 		{
 			on_input(event);
@@ -45,8 +47,6 @@ void GameManager::on_server(float delta)
 
 	ConfigGameManager::instance()->server.listen(ConfigHomeManager::instance()->get_ip(),
 		ConfigHomeManager::instance()->get_port());
-
-	//listen
 }
 
 void GameManager::on_input(const SDL_Event& event)
@@ -103,6 +103,7 @@ GameManager::GameManager()
 	ScreenManager* scr_instance = ScreenManager::instance();
 	scr_instance->add_screen("main_screen",new MainScreen("main_screen", res_instance->find_audio("main_bgm")));
 	scr_instance->add_screen("open_server_screen",new OpenServerScreen("open_server_screen", res_instance->find_audio("main_bgm")));
+	scr_instance->add_screen("home_screen",new HomeScreen("home_screen", res_instance->find_audio("main_bgm")));
 	scr_instance->on_entry("main_screen");
 }
 

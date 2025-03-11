@@ -19,6 +19,21 @@ public:
 		return player;
 	}
 
+	void open_server()
+	{
+		is_on_server = true;
+	}
+
+	void close_server()
+	{
+		is_on_server = false;
+	}
+
+	bool get_is_on_server() const
+	{
+		return is_on_server;
+	}
+
 protected:
 	ConfigGameManager()
 	{
@@ -31,5 +46,5 @@ protected:
 
 private:
 	Player* player = nullptr;					//Íæ¼Ò
-	
+	bool is_on_server = false;
 };

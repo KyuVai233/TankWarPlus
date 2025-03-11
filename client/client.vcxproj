@@ -160,6 +160,7 @@
     <ClInclude Include="resources_manager.h" />
     <ClInclude Include="screen.h" />
     <ClInclude Include="screen_manager.h" />
+    <ClInclude Include="second_screen.h" />
     <ClInclude Include="status_machine.h" />
     <ClInclude Include="tank.h" />
     <ClInclude Include="status_node.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="home_screen.cpp" />
     <ClCompile Include="open_server_screen.cpp" />
+    <ClCompile Include="second_screen.cpp" />
     <ClCompile Include="wave.cpp" />
     <ClCompile Include="game_manager.cpp" />
     <ClCompile Include="main.cpp" />

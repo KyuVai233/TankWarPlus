@@ -18,7 +18,8 @@ void ScreenManager::switch_screen()
 	if (current_screen->get_next_screen() == "none")
 		return;
 	const std::string str = current_screen->get_next_screen();
-	if (current_screen->get_background_bgm() != screen_pool[str]->get_background_bgm())
+	if (current_screen->get_background_bgm() != screen_pool[str]->get_background_bgm() 
+		|| !screen_pool[str]->get_background_bgm())
 	{
 		Mix_HaltChannel(-1);
 		Mix_PlayChannel(-1, screen_pool[str]->get_background_bgm(), -1);

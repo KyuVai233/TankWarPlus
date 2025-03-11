@@ -16,7 +16,7 @@ void Tile::set_team_visible(TeamType team, bool is_visible)
 	case TeamType::Green:
 		team_visible.GreenVisible = is_visible;
 		break;
-	case TeamType::Pink:
+	case TeamType::Purple:
 		team_visible.PinkVisible = is_visible;
 		break;
 	case TeamType::Orange:

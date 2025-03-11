@@ -82,6 +82,10 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 		button_create_home->set_size_usable({ 58,28 });
 		button_create_home->set_music_covered(instance->find_audio("click_button"));
 		button_list.emplace_back(button_create_home);
+		button_create_home->set_on_left_clicked([&]()
+			{
+				create_home();
+			});
 	}
 	{
 		SDL_Texture* button_quit_open_server_idle = instance->find_texture("button_quit_open_server_idle");
@@ -262,6 +266,16 @@ void OpenServerScreen::on_render(SDL_Renderer* renderer)
 		SDL_Rect rect_src = { 0,0,(float)w,(float)h };
 		SDL_Rect rect_dst = { 43 * 4 + 384 + text_spacing.x,37 * 4 + 224 + text_spacing.y,(float)w,(float)h };
 		draw(renderer, tex_port, &rect_src, &rect_dst);
+	}
+}
+
+void OpenServerScreen::create_home()
+{
+	ConfigHomeManager* instance = ConfigHomeManager::instance();
+	if (!instance->get_ip().empty() && instance->get_port() != 0)
+	{
+		ConfigGameManager::instance()->get_player()->set_identity(Player::Identity::Owner);
+		set_next_screen("home_screen");
 	}
 }
 

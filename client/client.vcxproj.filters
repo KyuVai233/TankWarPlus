@@ -28,17 +28,11 @@
     <Filter Include="头文件\screen\config_game_screen">
       <UniqueIdentifier>{2a238098-05db-4ba6-b36f-47b08a456601}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\screen\config_home_screen">
-      <UniqueIdentifier>{47baeff1-3fb1-4a2f-af51-0f1bffff472d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\init">
       <UniqueIdentifier>{d4d085a3-fcec-4423-8a11-fa280602ca5d}</UniqueIdentifier>
     </Filter>
     <Filter Include="头文件\screen\game_screen">
       <UniqueIdentifier>{b8be4ba2-885f-4f3c-8510-425a795def79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\screen\choose_tank_screen">
-      <UniqueIdentifier>{6fd7f3ae-66c2-4986-89ff-a554a3f5e60d}</UniqueIdentifier>
     </Filter>
     <Filter Include="头文件\screen\home_screen">
       <UniqueIdentifier>{d09246d2-d269-413c-a29c-68ea0a2ae52e}</UniqueIdentifier>
@@ -84,6 +78,15 @@
     </Filter>
     <Filter Include="头文件\init\button">
       <UniqueIdentifier>{4babadc1-a6bf-46c6-b229-5f0fd9b34df1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\screen\second_screen">
+      <UniqueIdentifier>{1dea2b47-47fb-4959-b4a4-42b70758df7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\screen\second_screen\choose_tank_screen">
+      <UniqueIdentifier>{6fd7f3ae-66c2-4986-89ff-a554a3f5e60d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\screen\second_screen\config_home_screen">
+      <UniqueIdentifier>{47baeff1-3fb1-4a2f-af51-0f1bffff472d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -177,9 +180,6 @@
     <ClInclude Include="wave.h">
       <Filter>头文件\init\wave</Filter>
     </ClInclude>
-    <ClInclude Include="team_type.h">
-      <Filter>头文件\init</Filter>
-    </ClInclude>
     <ClInclude Include="included_screen.h">
       <Filter>头文件\screen</Filter>
     </ClInclude>
@@ -188,6 +188,12 @@
     </ClInclude>
     <ClInclude Include="button.h">
       <Filter>头文件\init\button</Filter>
+    </ClInclude>
+    <ClInclude Include="second_screen.h">
+      <Filter>头文件\screen\second_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="team_type.h">
+      <Filter>头文件\player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +241,9 @@
     </ClCompile>
     <ClCompile Include="button.cpp">
       <Filter>头文件\init\button</Filter>
+    </ClCompile>
+    <ClCompile Include="second_screen.cpp">
+      <Filter>头文件\screen\second_screen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

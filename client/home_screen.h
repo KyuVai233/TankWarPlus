@@ -9,10 +9,7 @@
 class HomeScreen : public Screen
 {
 public:
-	HomeScreen(const std::string& screen_type, Mix_Chunk* background_bgm)
-		:Screen(screen_type, background_bgm)
-	{
-	}
+	HomeScreen(const std::string& screen_type, Mix_Chunk* background_bgm);
 
 	~HomeScreen() = default;
 

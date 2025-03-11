@@ -154,7 +154,7 @@ private:
 
 	std::string home_name;						//房间名
 	std::string ip;								//ip
-	int port;									//端口
+	int port = 25565;							//端口
 
 private:
 	void on_hearted(float delta)

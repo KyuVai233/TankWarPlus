@@ -19,16 +19,6 @@ class GameManager : public Manager<GameManager>
 public:
 	int run(int argc, char** argv);
 
-	void on_server(float delta);
-
-	void on_input(const SDL_Event& event);
-
-	void on_update(float delta);
-
-	void on_render(SDL_Renderer* renderer);
-
-	void do_post(float delta);
-
 protected:
 	GameManager();
 	~GameManager();
@@ -45,5 +35,15 @@ private:
 private:
 	//初始化标识
 	void init_assert(bool flag, const char* err_msg);
+
+	void on_server(float delta);
+
+	void on_input(const SDL_Event& event);
+
+	void on_update(float delta);
+
+	void on_render(SDL_Renderer* renderer);
+
+	void do_post(float delta);
 
 };

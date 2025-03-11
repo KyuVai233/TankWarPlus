@@ -11,7 +11,7 @@ public:
 	{
 		None,					//无
 		Owner,					//房主
-		GamePlayer,				//参与玩家
+		Player,					//参与玩家
 		Visitor					//观战玩家
 	};
 
