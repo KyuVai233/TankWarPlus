@@ -35,4 +35,10 @@ private:
 	std::unordered_map<std::string, SDL_Texture*> texture_pool;
 
 	TTF_Font* main_font = nullptr;
+
+private:
+	//更改纹理中某个颜色至另一个颜色且调整其大小
+	SDL_Texture* modify_texture(SDL_Renderer* renderer, SDL_Texture* tex,
+		Uint32 color_src, Uint32 color_dst, int new_width = 0, int new_height = 0);
+
 };

@@ -25,7 +25,7 @@ public:
 
 	void create_home();
 
-	void connect();
+	bool connect();
 
 private:
 	bool is_try_build = false;		//是否尝试创建房间

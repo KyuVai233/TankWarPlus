@@ -110,7 +110,7 @@ private:
 	int order = -1;								//0开始
 	/*
 	error
-	-1 没名字
+	-1 没名字或名字重复
 	-2 请求操作失败
 	*/
 	TeamType team = TeamType::Blue;				//队伍

@@ -70,6 +70,15 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 		button_connect_home->set_size_usable({ 58,28 });
 		button_connect_home->set_music_covered(instance->find_audio("click_button"));
 		button_list.emplace_back(button_connect_home);
+		button_connect_home->set_on_left_clicked([&]()
+			{
+				if (!connect())
+				{
+					ConfigHomeManager* home_instance = ConfigHomeManager::instance();
+					home_instance->set_ip("");
+					next_screen = "open_server_screen";
+				}
+			});
 	}
 	{
 		SDL_Texture* button_create_home_idle = instance->find_texture("button_create_home_idle");
@@ -223,7 +232,7 @@ void OpenServerScreen::on_update(float delta)
 	if (!is_write_ip && !str_ip.empty())
 	{
 		std::regex pattern_ip("^(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d{2}|[1-9]?\\d)){3}$");
-		if (std::regex_match(str_ip, pattern_ip))
+		if (std::regex_match(str_ip, pattern_ip) || str_ip == "localhost")
 		{
 			ConfigHomeManager::instance()->set_ip(str_ip);
 		}
@@ -279,8 +288,10 @@ void OpenServerScreen::create_home()
 	}
 }
 
-void OpenServerScreen::connect()
+bool OpenServerScreen::connect()
 {
+	is_write_ip = false;
+	is_write_port = false;
 	ConfigGameManager* instance = ConfigGameManager::instance();
 	const std::string str_address = ConfigHomeManager::instance()->get_address();
 	instance->client = new httplib::Client(str_address);
@@ -290,14 +301,16 @@ void OpenServerScreen::connect()
 		instance->get_player()->get_player_id(), "text/plain");
 	if (!result_join || result_join != 200)
 	{
-		//未连接到服务器
-		return;
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, u8"无法连接至服务器", "connect_error", NULL);
+		return false;
 	}
 	
 	int order = std::stoi(result_join->body);
 	if (order == -1)
 	{
-		//名字未定义
-		return;
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, u8"名字未定义或重复", "name_error", NULL);
+		return false;
 	}
+
+	return true;
 }
