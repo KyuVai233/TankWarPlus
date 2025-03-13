@@ -125,7 +125,7 @@ void HomeScreen::do_post(float delta)
 			std::string player_id = req.body;
 			ConfigHomeManager* instance = ConfigHomeManager::instance();
 
-			int order = instance->get_num_player() - 1;
+			int order = instance->get_num_player();
 			if (instance->get_num_player() >= instance->get_max_num_player())
 			{
 				instance->add_num_visitor();
@@ -137,7 +137,7 @@ void HomeScreen::do_post(float delta)
 			{
 				if (player->get_player_id() == player_id)
 				{
-					order = -1;
+					//order = -1;
 					break;
 				}
 			}

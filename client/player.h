@@ -16,7 +16,7 @@ public:
 	};
 
 public:
-	Player() = default;
+	Player():player_id("none"){}
 
 	~Player()
 	{

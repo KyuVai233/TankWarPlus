@@ -298,6 +298,7 @@ void OpenServerScreen::create_home()
 	if (!instance->get_ip().empty() && instance->get_port() != 0)
 	{
 		ConfigGameManager::instance()->get_player()->set_identity(Player::Identity::Owner);
+		ConfigGameManager::instance()->get_player()->set_order(0);
 		set_next_screen("home_screen");
 	}
 }
@@ -313,7 +314,13 @@ bool OpenServerScreen::connect()
 
 	httplib::Result result_join = instance->client->Post("join", 
 		instance->get_player()->get_player_id(), "text/plain");
-	
+
+	if (!result_join || result_join->status != 200)
+	{
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, u8"无法连接至服务器", "connect_error", NULL);
+		return false;
+	}
+
 	int order = std::stoi(result_join->body);
 	if (order == -1)
 	{
@@ -321,11 +328,6 @@ bool OpenServerScreen::connect()
 		return false;
 	}
 	
-	if (!result_join || result_join != 200)
-	{
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, u8"无法连接至服务器", "connect_error", NULL);
-		return false;
-	}
-
+	set_next_screen("home_screen");
 	return true;
 }
