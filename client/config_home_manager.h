@@ -39,7 +39,8 @@ public:
 
 	const int get_max_num_player() const
 	{
-		return game_mode_list[idx_game_mode]->MAX_NUM_PLAYER;
+		return 4;
+		//return game_mode_list[idx_game_mode]->MAX_NUM_PLAYER;
 	}
 	
 	const int get_mim_num_player() const

@@ -109,8 +109,16 @@ void HomeScreen::on_update(float delta)
 
 void HomeScreen::do_post(float delta)
 {
+	ConfigGameManager::instance()->server.Post("hello",
+		[&](const httplib::Request& req, httplib::Response& res)
+		{
+			std::cout << "hello from client" << std::endl;
+
+			res.set_content("hello from server", "text/plain");
+		});
+
 	//加入房间 传入string player_id，传出string order
-	ConfigGameManager::instance()->server.Post("/join",
+	ConfigGameManager::instance()->server.Post("join",
 		[&](const httplib::Request& req, httplib::Response& res)
 		{
 			std::lock_guard<std::mutex> lock(mutex_join_or_switch);
@@ -134,12 +142,13 @@ void HomeScreen::do_post(float delta)
 				}
 			}
 			res.set_content(std::to_string(order), "text/plain");
-			if (order == -1)
-				return;
-			Player* player = new Player();
-			player->set_order(order);
-			player->set_player_id(player_id);
-			instance->add_player_in_list(player);
+			if (order != -1)
+			{
+				Player* player = new Player();
+				player->set_order(order);
+				player->set_player_id(player_id);
+				instance->add_player_in_list(player);
+			}
 		});
 
 	//获取玩家列表并且记录时间一次（心跳） 传入需要的string order，传出json player_list[order](player_id,(identity, team_type))

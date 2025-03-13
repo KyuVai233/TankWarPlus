@@ -72,6 +72,20 @@ OpenServerScreen::OpenServerScreen(const std::string& screen_type, Mix_Chunk* ba
 		button_list.emplace_back(button_connect_home);
 		button_connect_home->set_on_left_clicked([&]()
 			{
+				/*
+				httplib::Client client("192.168.192.134:25565");
+				httplib::Result result = client.Post("hello");
+				if (!result || result->status != 200)
+				{
+					std::cout << "error" << std::endl;
+
+					return -1;
+				}
+
+				std::cout << result->body << std::endl;
+
+				system("pause");
+				*/
 				if (!connect())
 				{
 					ConfigHomeManager* home_instance = ConfigHomeManager::instance();
@@ -299,16 +313,17 @@ bool OpenServerScreen::connect()
 
 	httplib::Result result_join = instance->client->Post("join", 
 		instance->get_player()->get_player_id(), "text/plain");
-	if (!result_join || result_join != 200)
-	{
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, u8"无法连接至服务器", "connect_error", NULL);
-		return false;
-	}
 	
 	int order = std::stoi(result_join->body);
 	if (order == -1)
 	{
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, u8"名字未定义或重复", "name_error", NULL);
+		return false;
+	}
+	
+	if (!result_join || result_join != 200)
+	{
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, u8"无法连接至服务器", "connect_error", NULL);
 		return false;
 	}
 
