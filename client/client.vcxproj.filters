@@ -88,6 +88,9 @@
     <Filter Include="头文件\screen\second_screen\config_home_screen">
       <UniqueIdentifier>{47baeff1-3fb1-4a2f-af51-0f1bffff472d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\init\slider">
+      <UniqueIdentifier>{a13c13f4-7cf5-46f4-9048-9727e9afe0b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="time_timer.h">
@@ -195,6 +198,12 @@
     <ClInclude Include="team_type.h">
       <Filter>头文件\player</Filter>
     </ClInclude>
+    <ClInclude Include="config_game_screen.h">
+      <Filter>头文件\screen\config_game_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="slider.h">
+      <Filter>头文件\init\slider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\thirdparty\cJSON\cJSON.c">
@@ -244,6 +253,12 @@
     </ClCompile>
     <ClCompile Include="second_screen.cpp">
       <Filter>头文件\screen\second_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="config_game_screen.cpp">
+      <Filter>头文件\screen\config_game_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="slider.cpp">
+      <Filter>头文件\init\slider</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

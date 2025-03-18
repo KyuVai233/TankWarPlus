@@ -2,6 +2,7 @@
 
 #include "button.h"
 #include "image.h"
+#include "slider.h"
 #include "resources_manager.h"
 
 #include <string>
@@ -39,5 +40,6 @@ private:
 	Vector2 position = { 0,0 };
 	std::vector<Button*> button_list;									//按钮列表
 	std::vector<Image*> image_list;										//图片列表
+	std::vector<Slider*> slider_list;									//滑块列表
 };
 

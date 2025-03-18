@@ -158,8 +158,6 @@ void OpenServerScreen::on_input(const SDL_Event& event)
 			is_write_port = false;
 			button_port->set_button_status(Button::ButtonStatus::Idle);
 		}
-		
-
 		break;
 	case SDL_KEYDOWN:
 		if (event.key.keysym.scancode == SDL_SCANCODE_BACKSPACE)

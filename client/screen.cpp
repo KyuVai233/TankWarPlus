@@ -36,6 +36,11 @@ void Screen::on_input(const SDL_Event& event)
 		break;
 	}
 
+	for (Slider* slider : slider_list)
+	{
+		slider->on_input(event);
+	}
+
 	for (SecondScreen* screen : second_screen_list)
 	{
 		screen->on_input(event);
@@ -64,6 +69,11 @@ void Screen::on_render(SDL_Renderer* renderer)
 	{
 		button->on_render(renderer); 
 		draw_help(renderer, button->get_rect_usable());
+	}
+
+	for (Slider* slider : slider_list)
+	{
+		slider->on_render(renderer);
 	}
 
 	for (SecondScreen* screen : second_screen_list)

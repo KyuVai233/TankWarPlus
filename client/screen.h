@@ -3,6 +3,7 @@
 #include "button.h"
 #include "image.h"
 #include "second_screen.h"
+#include "slider.h"
 
 #include "../thirdparty/httplib.h"
 
@@ -53,4 +54,5 @@ protected:
 	std::vector<Image*> image_list;										//图片列表
 	std::unordered_map<std::string, SecondScreen*> second_screen_pool;	//存在的副屏池
 	std::vector<SecondScreen*> second_screen_list;						//当前副屏列表
+	std::vector<Slider*> slider_list;									//滑块列表
 };

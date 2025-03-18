@@ -147,6 +147,7 @@
     <ClInclude Include="config_game_manager.h" />
     <ClInclude Include="config_home_manager.h" />
     <ClInclude Include="effect.h" />
+    <ClInclude Include="config_game_screen.h" />
     <ClInclude Include="game_manager.h" />
     <ClInclude Include="game_mode.h" />
     <ClInclude Include="home_screen.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="screen.h" />
     <ClInclude Include="screen_manager.h" />
     <ClInclude Include="second_screen.h" />
+    <ClInclude Include="slider.h" />
     <ClInclude Include="status_machine.h" />
     <ClInclude Include="tank.h" />
     <ClInclude Include="status_node.h" />
@@ -179,9 +181,11 @@
     <ClCompile Include="..\thirdparty\cJSON\cJSON.c" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="config_game_screen.cpp" />
     <ClCompile Include="home_screen.cpp" />
     <ClCompile Include="open_server_screen.cpp" />
     <ClCompile Include="second_screen.cpp" />
+    <ClCompile Include="slider.cpp" />
     <ClCompile Include="wave.cpp" />
     <ClCompile Include="game_manager.cpp" />
     <ClCompile Include="main.cpp" />

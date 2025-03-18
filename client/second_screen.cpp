@@ -35,6 +35,9 @@ void SecondScreen::on_input(const SDL_Event& event)
 	default:
 		break;
 	}
+
+	for (Slider* slider : slider_list)
+		slider->on_input(event);
 }
 
 void SecondScreen::on_update(float delta)
@@ -55,6 +58,9 @@ void SecondScreen::on_render(SDL_Renderer* renderer)
 		button->on_render(renderer);
 		draw_help(renderer, button->get_rect_usable());
 	}
+
+	for (Slider* slider : slider_list)
+		slider->on_render(renderer);
 }
 
 void SecondScreen::do_post(float delta)

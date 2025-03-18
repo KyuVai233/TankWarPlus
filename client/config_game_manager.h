@@ -34,6 +34,16 @@ public:
 		return is_on_server;
 	}
 
+	void set_volume(float val)
+	{
+		volume = val;
+	}
+
+	float get_volume() const
+	{
+		return volume;
+	}
+
 protected:
 	ConfigGameManager()
 	{
@@ -47,4 +57,5 @@ protected:
 private:
 	Player* player = nullptr;					//玩家
 	bool is_on_server = false;
+	float volume = 50;							//音量（百分比）
 };
