@@ -3,7 +3,58 @@
 ConfigGameScreen::ConfigGameScreen(const std::string& screen_type, Mix_Chunk* background_bgm)
 	:Screen(screen_type, background_bgm)
 {
-
+	ResourcesManager* instance = ResourcesManager::instance();
+	{
+		SDL_Texture* tex_game_config_background = instance->find_texture("game_config_background");
+		Image* game_config_background = new Image(tex_game_config_background, { 0,0,1280,960 }, { 0,0,1280,960 });
+		image_list.emplace_back(game_config_background);
+	}
+	{
+		SDL_Texture* button_back_in_game_config_idle = instance->find_texture("button_back_in_game_config_idle");
+		Button* button_back_in_game_config = new Button(button_back_in_game_config_idle, button_back_in_game_config_idle, nullptr);
+		button_back_in_game_config->set_size_src(button_back_in_game_config->get_initial_size());
+		button_back_in_game_config->set_position_dst({ 247,62 });
+		button_back_in_game_config->set_music_covered(instance->find_audio("click_button"));
+		button_list.emplace_back(button_back_in_game_config);
+	}
+	{
+		SDL_Texture* button_player_id_idle = instance->find_texture("button_player_id_idle");
+		Button* button_player_id = new Button(button_player_id_idle, button_player_id_idle, button_player_id_idle);
+		button_player_id->set_size_src(button_player_id->get_initial_size());
+		button_player_id->set_position_dst({ 525,256 });
+		button_player_id->set_music_covered(instance->find_audio("click_button"));
+		button_list.emplace_back(button_player_id);
+	}
+	{
+		SDL_Texture* button_apply_in_game_config_idle = instance->find_texture("button_apply_in_game_config_idle");
+		Button* button_apply_in_game_config = new Button(button_apply_in_game_config_idle, button_apply_in_game_config_idle, nullptr);
+		button_apply_in_game_config->set_size_src(button_apply_in_game_config->get_initial_size());
+		button_apply_in_game_config->set_position_dst({ 444,583 });
+		button_apply_in_game_config->set_music_covered(instance->find_audio("click_button"));
+		button_list.emplace_back(button_apply_in_game_config);
+	}
+	{
+		SDL_Texture* button_init_game_config_idle = instance->find_texture("button_init_game_config_idle");
+		Button* button_init_game_config = new Button(button_init_game_config_idle, button_init_game_config_idle, nullptr);
+		button_init_game_config->set_size_src(button_init_game_config->get_initial_size());
+		button_init_game_config->set_position_dst({ 708,583 });
+		button_init_game_config->set_music_covered(instance->find_audio("click_button"));
+		button_list.emplace_back(button_init_game_config);
+	}
+	{
+		SDL_Texture* slider_volume_idle = instance->find_texture("slider_volume_idle");
+		SDL_Texture* slider_volume_covered = instance->find_texture("slider_volume_covered");
+		SDL_Texture* button_slider_volume = instance->find_texture("button_slider_volume");
+		SDL_Texture* slider_volume_ban = instance->find_texture("slider_volume_ban");
+		Slider* slider_volume = new Slider(slider_volume_idle, slider_volume_covered, false);
+		slider_volume->set_tex_button_slider(button_slider_volume);
+		slider_volume->set_tex_ban_slider(slider_volume_ban);
+		slider_volume->set_pos_slider({ 544,398 });
+		slider_volume->set_is_show_val(true);
+		slider_volume->set_text_spacing({ 300,-1 });
+		slider_volume->set_is_open_ban_slider(true);
+		slider_list.emplace_back(slider_volume);
+	}
 }
 
 void ConfigGameScreen::on_input(const SDL_Event& event)
@@ -76,11 +127,17 @@ void ConfigGameScreen::on_input(const SDL_Event& event)
 	default:
 		break;
 	}
+
+	for (Slider* slider : slider_list)
+		slider->on_input(event);
 }
 
 void ConfigGameScreen::on_update(float delta)
 {
 	Screen::on_update(delta);
+
+	for (Slider* slider : slider_list)
+		slider->on_update(delta);
 }
 
 void ConfigGameScreen::on_render(SDL_Renderer* renderer)

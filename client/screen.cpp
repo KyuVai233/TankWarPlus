@@ -54,6 +54,9 @@ void Screen::on_update(float delta)
 		button->on_update(delta);
 	}
 
+	for (Slider* slider : slider_list)
+		slider->on_update(delta);
+
 	for (SecondScreen* screen : second_screen_list)
 	{
 		screen->on_update(delta);

@@ -104,6 +104,7 @@ GameManager::GameManager()
 	scr_instance->add_screen("main_screen",new MainScreen("main_screen", res_instance->find_audio("main_bgm")));
 	scr_instance->add_screen("open_server_screen",new OpenServerScreen("open_server_screen", res_instance->find_audio("main_bgm")));
 	scr_instance->add_screen("home_screen",new HomeScreen("home_screen", res_instance->find_audio("main_bgm")));
+	scr_instance->add_screen("config_game_screen",new ConfigGameScreen("config_game_screen", res_instance->find_audio("main_bgm")));
 	scr_instance->on_entry("main_screen");
 }
 
