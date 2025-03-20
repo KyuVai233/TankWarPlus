@@ -34,7 +34,7 @@ void Slider::on_update(float delta)
 {
 	SDL_Point size_slider;
 	SDL_QueryTexture(tex_covered, NULL, NULL, &size_slider.x, &size_slider.y);
-	if (is_clicked_mouse_left_and_in_button)
+	if (is_clicked_mouse_left_and_in_button && !is_ban_slider)
 	{
 		is_vertical ? pos_button_slider.y = pos_cursor.y : pos_button_slider.x = pos_cursor.x;
 		if (pos_button_slider.x < pos_slider.x)	pos_button_slider.x = pos_slider.x;
@@ -45,7 +45,14 @@ void Slider::on_update(float delta)
 
 	val = is_vertical ? (pos_button_slider.y - pos_slider.y) / size_slider.y : (pos_button_slider.x - pos_slider.x) / size_slider.x;
 	if (is_ban_slider)
+	{
 		val = 0;
+		if(is_vertical)
+			pos_button_slider = { pos_slider.x + size_slider.x / 2,pos_slider.y};
+		else
+			pos_button_slider = { pos_slider.x,pos_slider.y + size_slider.y / 2 };
+	}
+		
 }
 
 void Slider::on_render(SDL_Renderer* renderer)

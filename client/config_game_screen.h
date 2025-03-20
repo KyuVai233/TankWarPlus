@@ -1,6 +1,7 @@
 #pragma once
 
 #include "screen.h"
+#include "config_game_manager.h"
 
 #include <string>
 

@@ -57,5 +57,5 @@ protected:
 private:
 	Player* player = nullptr;					//玩家
 	bool is_on_server = false;
-	float volume = 50;							//音量（百分比）
+	float volume = 0.2;							//音量
 };

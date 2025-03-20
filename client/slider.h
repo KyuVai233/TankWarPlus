@@ -8,13 +8,16 @@
 #include "SDL_ttf.h"
 
 #include <functional>
+#include <iostream>
 
 class Slider
 {
 public:
 	Slider(SDL_Texture* tex_idle, SDL_Texture* tex_covered, bool is_vertical)
 		:tex_idle(tex_idle), tex_covered(tex_covered), is_vertical(is_vertical)
-	{ }
+	{ 
+		SDL_QueryTexture(tex_covered, NULL, NULL, &size_covered_or_idle.x, &size_covered_or_idle.y);
+	}
 
 	~Slider() = default;
 
@@ -27,9 +30,17 @@ public:
 	void set_pos_slider(const Vector2& pos)
 	{
 		pos_slider = pos;
-		SDL_Point size;
-		SDL_QueryTexture(tex_covered, NULL, NULL, &size.x, &size.y);
-		pos_button_slider = { pos.x + size.x / 2, pos.y + size.y / 2 };
+		pos_button_slider = { pos.x + size_covered_or_idle.x / 2, pos.y + size_covered_or_idle.y / 2 };
+	}
+
+	void set_pos_button_slider(float val)
+	{
+		SDL_Point size = size_covered_or_idle;
+		Vector2 pos;
+		is_vertical ? pos = { pos_slider.x + size.x / 2, pos_slider.y + size.y * val } :
+			pos = { pos_slider.x + size.x * val, pos_slider.y + size.y / 2 };
+		pos_button_slider = pos;
+		this->val = val;
 	}
 
 	void set_tex_ban_slider(SDL_Texture* tex)
@@ -63,14 +74,26 @@ public:
 		text_spacing = size;
 	}
 
-	void set_clicked_text(std::function<void()> clicked_text)
+	void set_on_init(std::function<void()> on_init)
 	{
-		this->clicked_text = clicked_text;
+		this->on_init = on_init;
 	}
 
 	void set_is_open_ban_slider(bool flag)
 	{
 		is_open_ban_slider = flag;
+	}
+
+	void init_slider()
+	{
+		if (on_init)	on_init();
+		SDL_Point size;
+		SDL_QueryTexture(tex_covered, NULL, NULL, &size.x, &size.y);
+	}
+
+	const SDL_Point& get_size_covered_or_idle() const
+	{
+		return size_covered_or_idle;
 	}
 
 	void on_input(const SDL_Event& event);
@@ -89,7 +112,7 @@ private:
 	SDL_Texture* tex_ban_slider = nullptr;
 	SDL_Texture* tex_val = nullptr;
 
-	float val = 50;										//值（百分比）
+	float val = 0.5f;									//值
 	bool is_vertical = false;							//滑块是否纵向移动
 	bool is_clicked_mouse_left_and_in_button = false;	//是否按下鼠标左键
 	bool is_show_val = false;							//是否显示值
@@ -98,6 +121,8 @@ private:
 
 	SDL_Point pos_cursor = { 0,0 };						//鼠标位置
 	SDL_Point size_button_slider = { 0,0 };				//滑块纹理大小
+	SDL_Point size_covered_or_idle;						//滑块条纹理大小
 	Vector2 text_spacing = { 0,0 };						//值与滑块(左上角)间距
-	std::function<void()> clicked_text;					//点击val后效果
+	std::function<void()> on_init;						//初始化执行前调用的函数
+
 };

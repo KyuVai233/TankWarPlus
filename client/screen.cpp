@@ -105,6 +105,11 @@ void Screen::entry_screen()
 		button->set_button_status(Button::ButtonStatus::Idle);
 	}
 
+	for (Slider* slider : slider_list)
+	{
+		slider->init_slider();
+	}
+
 	for (SecondScreen* screen : second_screen_list)
 	{
 		screen->entry_screen();

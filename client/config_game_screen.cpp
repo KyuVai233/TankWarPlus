@@ -53,6 +53,11 @@ ConfigGameScreen::ConfigGameScreen(const std::string& screen_type, Mix_Chunk* ba
 		slider_volume->set_is_show_val(true);
 		slider_volume->set_text_spacing({ 300,-1 });
 		slider_volume->set_is_open_ban_slider(true);
+		slider_volume->set_on_init([slider_volume]()
+			{
+				float val = ConfigGameManager::instance()->get_volume();
+				slider_volume->set_pos_button_slider(val);
+			});
 		slider_list.emplace_back(slider_volume);
 	}
 }
